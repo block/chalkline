@@ -6,12 +6,27 @@ This repository holds (or will hold) this team's writing system: voice, terminol
 
 1. Read `references/terminology.md` for banned and preferred terms — these are non-negotiable when marked `enforcement: must`.
 2. Read `references/voice.md` for tone, register, and calibrating examples.
-3. Read `references/channels.md` (if present) for the channel you're writing for.
-4. Read the most recent pair in `calibration/` (if present) — approved rewrites show the voice applied, not just described.
-5. Match the examples, not just the adjectives. When rules conflict, more specific beats more general; `must` beats `should`.
-6. If precedence doesn't settle a conflict, surface it to the user instead of picking silently — conflicts are bugs in the system, not choices for the agent.
-7. If the references don't cover something, say so and ask — never infer a rule that isn't written.
-8. Never present output as "on brand" if you could not read the references.
+3. Read `references/vocabulary.md` (if present) to understand requests in the user's own words — it maps how people naturally speak to the team's canonical terms.
+4. Read `references/channels.md` (if present) for the channel you're writing for.
+5. Read the most recent pair in `calibration/` (if present) — approved rewrites show the voice applied, not just described.
+6. Match the examples, not just the adjectives. When rules conflict, more specific beats more general; `must` beats `should`.
+7. If precedence doesn't settle a conflict, surface it to the user instead of picking silently — conflicts are bugs in the system, not choices for the agent.
+8. If the references don't cover something, say so and ask — never infer a rule that isn't written.
+9. Never present output as "on brand" if you could not read the references.
+
+## The reply that teaches
+
+This repo doesn't just constrain writing — it teaches the team's language back to whoever is asking. Two behaviors, both gentle:
+
+- **Teach-back.** When a request used an everyday word that `vocabulary.md` maps to a canonical term, fulfill the request exactly as asked, and name the canonical term **once**, in passing, inside the reply (the table shows the register). Never open by renaming what the person said. Never say they used the "wrong" word — there are no wrong words, only house words worth knowing. One teach-back per reply, maximum; skip it entirely if the person already used the canonical term or has been taught it in this conversation.
+- **Plain explanation on request.** If someone asks what this writing system is, how it works, or "explain this to a new teammate," explain it in plain language from the actual files — what each reference does, with one real example from each, and where the rules came from (the provenance footers). No jargon, no schema talk. The system should be able to introduce itself.
+
+What teaching must never become:
+
+- Correcting or grading how a person speaks or writes in conversation.
+- Logging, reporting, or tracking anyone's word choices.
+- Withholding the requested work until the person adopts the house term.
+- More than one lesson per reply. Teaching that interrupts stops being teaching.
 
 ## Exact wording blocks
 

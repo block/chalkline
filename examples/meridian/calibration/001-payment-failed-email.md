@@ -29,3 +29,7 @@
 | "by Friday" replaces "ASAP" | Promises carry a time or they don't ship | `references/channels.md` (email) |
 | One action, subject states what happened | Email: one action per email; subject under ~45 chars | `references/channels.md` (email) |
 | No exclamation points, no "Oops" | Calm: never add urgency the situation doesn't have | `references/voice.md` |
+
+## What this teaches
+
+When something goes wrong with money, say what happened and what's safe before what's needed — calm is stating facts in order, not adding reassurance.

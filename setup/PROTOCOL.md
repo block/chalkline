@@ -21,7 +21,7 @@ Ask these in order, adapting naturally to what they've already told you:
 3. **What words or phrases do you never want used? What do competitors say that you'd hate to sound like?**
    *(Seeds the banned list.)*
 4. **What words do you deliberately use — product names, feature names, terms of art? Any that people constantly get wrong?**
-   *(Seeds preferred terms and casing rules.)*
+   *(Seeds preferred terms and casing rules. For each term people get wrong, also capture what people actually say instead — those everyday phrases seed `vocabulary.md`, the map that lets agents understand requests in anyone's words and teach the house word gently.)*
 5. **Paste one example of your writing you love, and one you hate.**
    *(The single highest-value input. Extract voice attributes from the contrast and read them back for confirmation.)*
 6. **Where does your writing show up?** (product UI, email, support, social, docs)
@@ -49,6 +49,7 @@ Create files under `references/`, using the frontmatter contract in AGENTS.md:
 - **`voice.md`** — always. The three adjectives *with their probed meanings*, the loved/hated examples with a one-line "why" each, and 3–5 do/don't pairs derived from the interview.
 - **`terminology.md`** — always. Two tables: *use this* (term, casing, context) and *never this* (term, what to say instead). Mark banned terms `enforcement: must` only if the user called them non-negotiable.
 - **`channels.md`** — only if Phase 1 Q6 named specific channels. One short section per named channel.
+- **`vocabulary.md`** — only if Phase 1 Q4 surfaced terms people get wrong *and* the everyday phrases they use instead. Three columns: canonical term, what people often say, and a one-line teach-back written in the team's own register. State the boundary at the top: this file governs conversation, not output — `terminology.md` stays the authority for generated copy. If the interview produced no synonym pairs, skip the file; never invent how people talk.
 - **`AGENTS.md`** (repo root) — regenerate the "consult before writing" section so it names the actual files and the user's brand slug.
 
 Additional generation rules:
@@ -68,7 +69,7 @@ Hard limits: no file over ~80 lines; no rules the user didn't state or approve; 
 2. Rewrite it twice: once with no context, once consulting the new references.
 3. Show both versions side by side and point at the specific rules that drove each difference.
 4. Ask: **"Does the second one sound like you?"** If no — that's a rule gap. Fix the references, not the sample, and re-run.
-5. When they say yes, **save the pair** as `calibration/001-<short-slug>.md` containing: the original, the rewrite without the system, the rewrite with the system, the rules that drove each difference, and the approval date. This is the system's first regression check and its first few-shot example.
+5. When they say yes, **save the pair** as `calibration/001-<short-slug>.md` containing: the original, the rewrite without the system, the rewrite with the system, the rules that drove each difference, a one-line **"What this teaches"** note (the single lesson a new teammate should take from the pair), and the approval date. This is the system's first regression check, its first few-shot example, and the first page of its curriculum.
 
 Do not skip this phase. It is the moment the system earns trust.
 
