@@ -1,0 +1,13 @@
+{
+  "transcripts": {
+    "teach-on-synonyms.md": { "glosses": 1, "knownFindings": ["citation"] },
+    "already-canonical.md": { "glosses": 0 },
+    "hardened-teach-on.md": { "glosses": 1 },
+    "teaching-off.md": { "glosses": 0 },
+    "urgent-incident.md": { "glosses": 0 },
+    "pre-hardening-miscitation.md": { "glosses": 1, "knownFindings": ["citation"] }
+  },
+  "vocabularies": [
+    "examples/meridian/references/vocabulary.md"
+  ]
+}
