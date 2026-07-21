@@ -4,8 +4,6 @@
 
 chalkline sets up a writing system your agents can actually use — in one conversation. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
 
-Status: experimental · A [Builder Labs](https://github.com/block) project · Apache-2.0
-
 ## The problem
 
 Your agents write now — support replies, product copy, lifecycle email, release notes. What they know about *your* voice is whatever happened to be in the prompt. Style guides live in PDFs and wikis that no tool consults. Teams that skip setup blame the tools for output that was never given the chance to be right.
