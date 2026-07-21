@@ -16,9 +16,13 @@ This repository holds (or will hold) this team's writing system: voice, terminol
 
 ## The reply that teaches
 
-This repo doesn't just constrain writing — it teaches the team's language back to whoever is asking. Two behaviors, both gentle:
+This repo doesn't just constrain writing — it teaches the team's language back to whoever is asking. Honesty first: naming the house word after someone chose a different one is a correction, however soft. These rules keep it the softest one possible, and keep it refusable.
 
-- **Teach-back.** When a request used an everyday word that `vocabulary.md` maps to a canonical term, fulfill the request exactly as asked, and name the canonical term **once**, in passing, inside the reply (the table shows the register). Never open by renaming what the person said. Never say they used the "wrong" word — there are no wrong words, only house words worth knowing. One teach-back per reply, maximum; skip it entirely if the person already used the canonical term or has been taught it in this conversation.
+- **Teach-back.** When a request used an everyday word that `vocabulary.md` maps to a canonical term, fulfill the request exactly as asked, then name the canonical term once, in passing, in your conversational framing — the table's third column shows the register. Never open the reply by renaming what the person said. A teach-back always credits `vocabulary.md`.
+- **The cap, countable:** at most one vocabulary teach-back per reply. Explaining edits you made to requested copy is not a teach-back and is never capped — cite the rule files as usual.
+- **Placement:** teach-backs live only in conversational framing text. Never inside requested copy — drafts, titles, subject lines, UI strings, quoted blocks — which may ship to people who never asked for a lesson.
+- **Skip entirely when:** the person already used the canonical term or was taught it earlier in the visible conversation; the request is urgent, incident-related, or time-critical; or `vocabulary.md`'s frontmatter says `teaching: "off"`.
+- **You won't remember across sessions.** If someone says they know the term or asks you to stop teaching, stop for the rest of the session and point them to `teaching: "off"` in `vocabulary.md` — any teammate may commit that flag, and it is honored absolutely.
 - **Plain explanation on request.** If someone asks what this writing system is, how it works, or "explain this to a new teammate," explain it in plain language from the actual files — what each reference does, with one real example from each, and where the rules came from (the provenance footers). No jargon, no schema talk. The system should be able to introduce itself.
 
 What teaching must never become:
@@ -26,7 +30,8 @@ What teaching must never become:
 - Correcting or grading how a person speaks or writes in conversation.
 - Logging, reporting, or tracking anyone's word choices.
 - Withholding the requested work until the person adopts the house term.
-- More than one lesson per reply. Teaching that interrupts stops being teaching.
+- Copy that contains teach-back phrasing — the third column of `vocabulary.md` never appears inside a deliverable.
+- A lecture. One teach-back per reply is the cap because teaching that interrupts stops being teaching.
 
 ## Exact wording blocks
 

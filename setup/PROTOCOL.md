@@ -20,8 +20,8 @@ Ask these in order, adapting naturally to what they've already told you:
    *(Probe each adjective once: "Confident like a pilot's announcement, or confident like a friend who knows the way?")*
 3. **What words or phrases do you never want used? What do competitors say that you'd hate to sound like?**
    *(Seeds the banned list.)*
-4. **What words do you deliberately use — product names, feature names, terms of art? Any that people constantly get wrong?**
-   *(Seeds preferred terms and casing rules. For each term people get wrong, also capture what people actually say instead — those everyday phrases seed `vocabulary.md`, the map that lets agents understand requests in anyone's words and teach the house word gently.)*
+4. **What words do you deliberately use — product names, feature names, terms of art? Which ones have everyday synonyms people reach for instead?**
+   *(Seeds preferred terms and casing rules. The everyday synonyms seed `vocabulary.md`, the map that lets agents understand requests in anyone's words. Record them as how people naturally talk — never as mistakes. If the user frames them as words people "get wrong," keep the term but drop the judgment.)*
 5. **Paste one example of your writing you love, and one you hate.**
    *(The single highest-value input. Extract voice attributes from the contrast and read them back for confirmation.)*
 6. **Where does your writing show up?** (product UI, email, support, social, docs)
@@ -49,7 +49,7 @@ Create files under `references/`, using the frontmatter contract in AGENTS.md:
 - **`voice.md`** — always. The three adjectives *with their probed meanings*, the loved/hated examples with a one-line "why" each, and 3–5 do/don't pairs derived from the interview.
 - **`terminology.md`** — always. Two tables: *use this* (term, casing, context) and *never this* (term, what to say instead). Mark banned terms `enforcement: must` only if the user called them non-negotiable.
 - **`channels.md`** — only if Phase 1 Q6 named specific channels. One short section per named channel.
-- **`vocabulary.md`** — only if Phase 1 Q4 surfaced terms people get wrong *and* the everyday phrases they use instead. Three columns: canonical term, what people often say, and a one-line teach-back written in the team's own register. State the boundary at the top: this file governs conversation, not output — `terminology.md` stays the authority for generated copy. If the interview produced no synonym pairs, skip the file; never invent how people talk.
+- **`vocabulary.md`** — only if Phase 1 Q4 surfaced canonical terms *and* the everyday synonyms people use instead. Three columns: canonical term, what people often say, and a one-line teach-back written in the team's own register. Frontmatter includes `teaching: "on"` with a comment that any teammate may set it `"off"` — agents honor the flag absolutely. State the boundary at the top: this file governs conversation, not output — `terminology.md` stays the authority for generated copy, and teach-back phrasing never appears inside a deliverable. State that the map is never a record of anyone's mistakes. The provenance footer names the actual approver (a person, not "the team"). If the interview produced no synonym pairs, skip the file; never invent how people talk.
 - **`AGENTS.md`** (repo root) — regenerate the "consult before writing" section so it names the actual files and the user's brand slug.
 
 Additional generation rules:
@@ -76,7 +76,8 @@ Do not skip this phase. It is the moment the system earns trust.
 ## Phase 5 — Commit
 
 1. Summarize what was created and where — references, the calibration pair, and the provenance footers.
-2. Commit with a message listing the files and noting rules were human-approved.
+2. If `vocabulary.md` was generated, say this before committing: **"One caution: this file teaches your words back to whoever asks — including teammates who weren't in this conversation. Share it with them; anyone may strike an entry (no justification needed) or turn teaching off entirely with the `teaching` flag. Setup approved by you shouldn't become a lesson imposed on them."**
+3. Commit with a message listing the files and noting rules were human-approved.
 3. Tell them the growth paths, one line each:
    - *"Any agent that opens this repo now consults your rules — try it in your next session."*
    - *"When you switch models or harnesses, re-run the calibration pair — if the rewrite drifts, your references need attention, and that's worth knowing."*
