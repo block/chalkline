@@ -42,7 +42,7 @@ Two to four small files plus a calibration pair, not a hundred. You own the repo
 5. Watch the before/after demo on your own copy — approve it, and it becomes your first calibration pair.
 6. Commit.
 
-Typical time: under 30 minutes.
+Designed to finish in one sitting. (We're measuring real setup times now — field reports welcome in the [setup-experience issues](https://github.com/block/chalkline/issues?q=label%3Asetup-experience).)
 
 ## After setup
 
@@ -59,6 +59,17 @@ Typical time: under 30 minutes.
 3. **Prove it immediately.** Setup ends with your own copy rewritten with and without your system. The approved pair stays as a standing regression check.
 4. **Honest agents.** No invented rules, no silently resolved conflicts, no paraphrased legal wording. When the system doesn't know, it says so and asks.
 5. **Plain files, no lock-in.** Markdown with light frontmatter. Readable by humans, consumable by any tool, portable forever.
+
+## An experiment, in the open
+
+chalkline is more than a onboarding convenience — it's an experiment in **how language spreads into organizational infrastructure**. The conventions this template ships (authority frontmatter, consult-order routing, exact-wording preservation, calibration pairs, provenance footers) are small, adoptable versions of ideas that larger language-governance systems need. We're testing whether they spread the way markdown and robots.txt did: by being copied, not by being specified.
+
+Two commitments, stated plainly:
+
+- **This stays open source.** Apache-2.0 with DCO sign-off means contributors keep their copyright — the license on what you've contributed and copied can't be pulled out from under you.
+- **Openness doesn't depend on our roadmap.** If Block's investment here ever ends, an archived template keeps working for everyone who used it. Your repo is yours; nothing phones home.
+
+See [ROADMAP.md](ROADMAP.md) for what we're testing next and what evidence gates each step.
 
 ## Related projects
 

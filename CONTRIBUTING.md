@@ -20,6 +20,7 @@ This project improves through **setup experiences**, not style opinions.
 - Every PR needs a one-line answer to: *what setup experience does this improve?*
 - Protocol changes are reviewed by one content/design maintainer and one technical maintainer.
 - Sign your commits (DCO): `git commit -s`.
+- **Disclose agent authorship.** This project practices what it preaches: work drafted by an AI agent and approved by a human is normal here — say so with a `Co-Authored-By:` trailer on the commit (and a 🤖 marker on issues/comments written on someone's behalf). Human approval is what makes it a contribution; the disclosure is what makes it honest.
 
 ## Governance
 
