@@ -1,0 +1,74 @@
+# Setup protocol
+
+You are helping a person build a writing system their agents can consult. Follow this protocol exactly. The result must be small, owned by the user, and provably useful before you finish.
+
+## Rules of engagement
+
+- One question at a time. Wait for the answer.
+- Plain language. Never say "enforcement taxonomy," "frontmatter," or "corpus" during the interview.
+- Everything you generate is a **proposal** until the user approves it.
+- If the user is unsure about a question, skip it. Gaps are fine; invented rules are not.
+- Total target time: under 30 minutes.
+
+## Phase 1 — Interview
+
+Ask these in order, adapting naturally to what they've already told you:
+
+1. **What does your company or team make, and who do you talk to?**
+   *(Gives you brand slug, audience, and register baseline.)*
+2. **If your writing were a person, what three words describe how it sounds?**
+   *(Probe each adjective once: "Confident like a pilot's announcement, or confident like a friend who knows the way?")*
+3. **What words or phrases do you never want used? What do competitors say that you'd hate to sound like?**
+   *(Seeds the banned list.)*
+4. **What words do you deliberately use — product names, feature names, terms of art? Any that people constantly get wrong?**
+   *(Seeds preferred terms and casing rules.)*
+5. **Paste one example of your writing you love, and one you hate.**
+   *(The single highest-value input. Extract voice attributes from the contrast and read them back for confirmation.)*
+6. **Where does your writing show up?** (product UI, email, support, social, docs)
+   *(Only channels they name get a section in channels.md. If they say "everywhere" or shrug, skip channels.md entirely.)*
+7. **Is any wording legally or contractually fixed — disclosures, trademarks, regulated claims?**
+   *(Anything here becomes `enforcement: must` and gets flagged: "Your agents will treat this as non-negotiable. Legal wording itself should live with whoever owns it — link it rather than paste it if it changes.")*
+
+## Phase 2 — Ingest (optional)
+
+Ask: **"Do you have anything I can learn from — a style guide, past campaigns, app copy, a website? Paste or attach anything, however rough."**
+
+For each artifact provided:
+
+1. Extract candidate rules (terms, patterns, tone markers) — at most 10 per artifact, highest-confidence first.
+2. Present them as a checklist: *"From your style guide I'd keep these 7 rules. Approve, edit, or drop each."*
+3. Only approved items enter the system. Record nothing silently.
+
+If they have nothing, say so is fine and move on — the interview alone is enough for v1.
+
+## Phase 3 — Generate
+
+Create files under `references/`, using the frontmatter contract in AGENTS.md:
+
+- **`voice.md`** — always. The three adjectives *with their probed meanings*, the loved/hated examples with a one-line "why" each, and 3–5 do/don't pairs derived from the interview.
+- **`terminology.md`** — always. Two tables: *use this* (term, casing, context) and *never this* (term, what to say instead). Mark banned terms `enforcement: must` only if the user called them non-negotiable.
+- **`channels.md`** — only if Phase 1 Q6 named specific channels. One short section per named channel.
+- **`AGENTS.md`** (repo root) — regenerate the "consult before writing" section so it names the actual files and the user's brand slug.
+
+Hard limits: no file over ~80 lines; no rules the user didn't state or approve; no placeholder sections ("TBD") — omit instead.
+
+## Phase 4 — Prove it
+
+1. Ask for (or reuse) a short sample of their real copy — an email, a screen, a support reply.
+2. Rewrite it twice: once with no context, once consulting the new references.
+3. Show both versions side by side and point at the specific rules that drove each difference.
+4. Ask: **"Does the second one sound like you?"** If no — that's a rule gap. Fix the references, not the sample, and re-run.
+
+Do not skip this phase. It is the moment the system earns trust.
+
+## Phase 5 — Commit
+
+1. Summarize what was created and where.
+2. Commit with a message listing the files and noting rules were human-approved.
+3. Tell them the two growth paths, one line each:
+   - *"Any agent that opens this repo now consults your rules — try it in your next session."*
+   - *"When you want this available across tools, point an MCP writing server or skill at `references/`."*
+
+## Re-running setup
+
+If `references/` already has content, switch to revision mode: read what exists, ask what's changed, propose **diffs** rather than regenerating. Never discard approved rules without explicit confirmation.

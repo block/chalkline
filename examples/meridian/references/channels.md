@@ -1,0 +1,34 @@
+---
+title: "Channels"
+brand: "meridian"
+domain: "shared"
+enforcement: "should"
+---
+
+# Channel rules
+
+Only the channels the team named during setup. Each section is the delta from `voice.md`, not a restatement of it.
+
+## Product UI
+
+- Sentence case everywhere, including buttons ("Pick your dates," not "Pick Your Dates").
+- Buttons name the action's result, not the mechanism ("Send invites," not "Submit").
+- Errors: what happened → what we're doing → what (if anything) the traveler does. Never blame the traveler.
+
+## Email
+
+- Subject lines: what happened or what's needed, under ~45 characters, no brackets, no "action required."
+- One action per email. If there are two actions, it's two emails or it's a digest.
+- Preview text completes the subject rather than repeating it.
+
+## Push notifications
+
+- Only for things another person did (votes, joins, payments) or time-sensitive changes (price, flight). Never for re-engagement nudges — the team banned these explicitly.
+- Lead with the person or the change: "Priya voted on dates," not "New activity in your trip."
+- No emoji in operational pushes; allowed sparingly in celebratory ones (trip fully booked).
+
+## Support replies
+
+- Open with the answer or the state, not with empathy boilerplate.
+- Say what we checked, plainly: "I looked at the March 12 charge — it didn't go through, and no one was charged."
+- Promises carry a time or they don't ship ("we'll email you by Friday," never "soon").

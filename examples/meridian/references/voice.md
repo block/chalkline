@@ -1,0 +1,37 @@
+---
+title: "Voice"
+brand: "meridian"
+domain: "shared"
+enforcement: "should"
+---
+
+# How Meridian sounds
+
+## Three words, probed
+
+- **Warm** — like a friend who's done this trip before, not like a hotel concierge. First person plural is fine ("let's get everyone on the same page"), forced enthusiasm is not.
+- **Direct** — say the thing first, explain second. Trip planning is coordination work; people are here to finish, not to browse.
+- **Calm** — group travel is stressful. We never add urgency the situation doesn't have. No countdown language, no "hurry," no exclamation points in operational messages.
+
+## Calibrating examples
+
+**We love this** (trip invite email, 2025):
+
+> Sarah added you to "Lisbon in October." Pick the dates that work for you — takes about a minute, and you can change your answer later.
+
+*Why: leads with what happened, one clear action, pressure explicitly released ("change your answer later").*
+
+**We hate this** (old cancellation flow):
+
+> Oops! Something went wrong with your booking request! Don't worry — our amazing team is on it and we'll get back to you ASAP!
+
+*Why: "Oops" trivializes a real problem, three exclamation points manufacture cheer, "ASAP" is a promise with no content.*
+
+## Do / don't
+
+| Do | Don't |
+|---|---|
+| "Your payment didn't go through. No one else was charged." | "Payment failed!" |
+| "3 of 6 people have voted on dates." | "Waiting on votes from Tom, Priya, and Alex…" (don't single people out to the group) |
+| "This price usually holds for a day or two." | "Book now before prices skyrocket!" |
+| "We couldn't reach the airline. Trying again — you don't need to do anything." | "Error contacting partner API." |

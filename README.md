@@ -1,36 +1,68 @@
-# chalkline README
+# chalkline
 
-Congrats, project leads! You got a new project to grow!
+**Snap a line before your agents build.**
 
-This stub is meant to help you form a strong community around your work. It's yours to adapt, and may 
-diverge from this initial structure. Just keep the files seeded in this repo, and the rest is yours to evolve! 
+chalkline sets up a writing system your agents can actually use — in one conversation. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
 
-## Introduction
+Status: experimental · A [Builder Labs](https://github.com/block) project · Apache-2.0
 
-Orient users to the project here. This is a good place to start with an assumption
-that the user knows very little - so start with the Big Picture and show how this
-project fits into it.
+## The problem
 
-Then maybe a dive into what this project does.
+Your agents write now — support replies, product copy, lifecycle email, release notes. What they know about *your* voice is whatever happened to be in the prompt. Style guides live in PDFs and wikis that no tool consults. Teams that skip setup blame the tools for output that was never given the chance to be right.
 
-Diagrams and other visuals are helpful here. Perhaps code snippets showing usage.
+## What this is
 
-Project leads should complete, alongside this `README`:
+A template repository plus a conversational setup protocol. Open your copy in any capable agent (goose, Claude Code, Codex, or another AGENTS.md-aware harness) and say:
 
-* [CODEOWNERS](./CODEOWNERS) - set project lead(s)
-* [CONTRIBUTING.md](./CONTRIBUTING.md) - Fill out how to: install prereqs, build, test, run, access CI, chat, discuss, file issues
-* [Bug-report.md](.github/ISSUE_TEMPLATE/bug-report.md) - Fill out `Assignees` add codeowners @names
-* [config.yml](.github/ISSUE_TEMPLATE/config.yml) - remove "(/add your discord channel..)" and replace the url with your Discord channel if applicable
+> **"Set up my writing system."**
 
-The other files in this template repo may be used as-is:
+The agent interviews you, optionally learns from material you already have (style guides, past campaigns, app strings), and generates a small set of reference files — **your** voice, **your** terms, **your** rules — that any agent can consult from then on.
 
-* [GOVERNANCE.md](./GOVERNANCE.md)
-* [LICENSE](./LICENSE)
+No CLI to install. No schema to learn. No rules to hand-write unless you want to.
 
-## Project Resources
+## What you get
 
-| Resource                                   | Description                                                                    |
-| ------------------------------------------ | ------------------------------------------------------------------------------ |
-| [CODEOWNERS](./CODEOWNERS)                 | Outlines the project lead(s)                                                   |
-| [GOVERNANCE.md](./GOVERNANCE.md)           | Project governance                                                             |
-| [LICENSE](./LICENSE)                       | Apache License, Version 2.0                                                    |
+```text
+your-repo/
+├── AGENTS.md              # how agents consult your writing system
+└── references/
+    ├── voice.md           # how you sound, with real examples
+    ├── terminology.md     # words you use, words you ban
+    └── channels.md        # per-channel rules (only if you need them)
+```
+
+Two to four small files, not a hundred. You own the repo. Every rule in it was approved by you. Grow it when reality demands, not before.
+
+## Quick start
+
+1. **Use this template** (GitHub → "Use this template") or clone it.
+2. Open the repo in your agent.
+3. Say **"set up my writing system."**
+4. Answer the questions. Paste in anything useful when asked. Approve what the agent extracts.
+5. Watch the before/after demo on your own copy.
+6. Commit.
+
+Typical time: under 30 minutes.
+
+## After setup
+
+- Any agent that opens the repo consults your references before writing.
+- Point an MCP writing server or skill at `references/` for retrieval across tools.
+- Re-run setup any time to revise; your approvals are preserved as history.
+
+## Design principles
+
+1. **Minimal by default.** A few small files beat an empire of guidelines. Complexity is added by users, when they need it — never shipped.
+2. **Your rules, your words.** The agent drafts; you approve. Nothing enters your system unreviewed.
+3. **Prove it immediately.** Setup ends with your own copy rewritten with and without your system, so you can see what it's for.
+4. **Plain files, no lock-in.** Markdown with light frontmatter. Readable by humans, consumable by any tool, portable forever.
+
+## What this is not
+
+- Not a style guide — it ships no opinions about how *you* should sound.
+- Not a grammar checker or writing model.
+- Not a compliance tool. It records your judgment; it doesn't supply it.
+
+## Contributing
+
+The protocol improves through setup experiences: where people stalled, what questions confused, what the generated files missed. See [CONTRIBUTING.md](CONTRIBUTING.md).
