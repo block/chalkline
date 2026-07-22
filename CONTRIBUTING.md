@@ -7,7 +7,7 @@ This project improves through **setup experiences**, not style opinions.
 - **Field reports:** where the interview stalled, what question confused you, how long setup took, what the generated files missed. Open an issue with the `setup-experience` label.
 - **Protocol improvements:** changes to `setup/PROTOCOL.md` that fix an observed failure. Link the experience that motivated it.
 - **Harness reports:** does the protocol behave the same in goose, Claude Code, Codex, and other AGENTS.md-aware agents? Divergence reports are gold.
-- **Example corpora:** fictional or explicitly publishable setups under `examples/` that show the output shape for a kind of team we don't cover.
+- **Example corpora:** fictional, redacted, or explicitly publishable setups under `examples/` that show the output shape for a kind of team we don't cover.
 
 ## What we don't want
 
@@ -17,6 +17,8 @@ This project improves through **setup experiences**, not style opinions.
 
 ## Ground rules
 
+- This repository and its issues are public. Never submit private writing rules, raw source documents, customer or personal data, confidential material, secrets, or private links. Reproduce failures with fictional or redacted material.
+- Submit only material you have permission to publish under this project's license.
 - Every PR needs a one-line answer to: *what setup experience does this improve?*
 - Protocol changes are reviewed by one content/design maintainer and one technical maintainer.
 - Sign your commits (DCO): `git commit -s`.

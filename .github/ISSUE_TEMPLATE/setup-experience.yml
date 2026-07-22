@@ -1,0 +1,65 @@
+name: Setup experience
+description: Report what happened while running Chalkline setup
+title: "[Setup experience]: "
+labels: ["setup-experience"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Chalkline. This repository is public. Do not include private writing rules, source material, customer data, or secrets. Use redacted or synthetic examples.
+  - type: input
+    id: version
+    attributes:
+      label: Chalkline version
+      description: Commit SHA, tag, or date of the template you used.
+      placeholder: 1681f5c
+    validations:
+      required: true
+  - type: input
+    id: harness
+    attributes:
+      label: Agent and harness
+      description: Include the agent or model version if known.
+      placeholder: goose with …
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Where did this happen?
+      options:
+        - Safety check
+        - Interview
+        - Ingest
+        - Generate
+        - Prove it
+        - Review and commit
+        - Revision of an existing system
+    validations:
+      required: true
+  - type: input
+    id: elapsed
+    attributes:
+      label: Approximate setup time
+      placeholder: 25 minutes; stopped before completion
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened?
+      description: Describe the behavior using public-safe details.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-report check
+      options:
+        - label: I removed or replaced private, personal, customer, confidential, and third-party source material.
+          required: true

@@ -2,6 +2,8 @@
 
 **Approved:** 2026-07-21 (fictional example)
 
+**Baseline method:** clean session with only the original and the request “Make this payment-failure email clearer and friendlier.”
+
 ## Original
 
 > Subject: Payment Failure Notification!
@@ -18,14 +20,13 @@
 
 > Subject: Your payment didn't go through
 >
-> Your card for "Lisbon in October" was declined — no one was charged, and your spot is safe for now. Update your payment method by Friday and you're set. You can change cards any time.
+> We couldn't process your payment for the Lisbon trip. Update your payment information so you don't lose your spot.
 
 ## What drove the difference
 
 | Change | Rule | File |
 |---|---|---|
-| "didn't go through… no one was charged" | Calm; say what happened, release pressure | `references/voice.md` |
-| Trip named as "Lisbon in October" | Trips are named objects, not generic "the trip" | `references/terminology.md` |
-| "by Friday" replaces "ASAP" | Promises carry a time or they don't ship | `references/channels.md` (email) |
-| One action, subject states what happened | Email: one action per email; subject under ~45 chars | `references/channels.md` (email) |
-| No exclamation points, no "Oops" | Calm: never add urgency the situation doesn't have | `references/voice.md` |
+| Subject states what happened and stays under ~45 characters | Email subject lines lead with what happened | `../references/channels.md` |
+| One requested action remains | Email contains one action | `../references/channels.md` |
+| No exclamation points, “Oops,” “ASAP,” or reassurance boilerplate | Calm; never manufacture urgency or cheer | `../references/voice.md` |
+| No cause, deadline, payment state, or guarantee was added | Writing rules change language, never product facts | `../../../AGENTS.md` |

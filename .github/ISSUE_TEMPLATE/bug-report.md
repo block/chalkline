@@ -3,9 +3,11 @@ name: 🐛 Bug Report
 about: Thank you for taking the time, please report a reproducible bug
 title: "[Bug] <Bug Title Here>"
 labels: bug
-assignees: daveh-beep
+assignees: ''
 
 ---
+
+> This repository is public. Do not include private writing rules, source material, customer data, or secrets. Use redacted or synthetic examples.
 
 **Describe the bug**
 *A clear and concise description of what the bug is.*
