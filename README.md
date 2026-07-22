@@ -28,35 +28,37 @@ your-repo/
 │   ├── terminology.md     # words you use, words you ban
 │   └── channels.md        # per-channel rules (only if you need them)
 └── calibration/
-    └── 001-….md           # approved before/after pairs: regression checks + few-shot examples
+    └── 001-….md           # approved before/after pairs: calibration checks + few-shot examples
 ```
 
-Two to four small files plus a calibration pair, not a hundred. You own the repo. Every rule in it was approved by you — and every file says so, with a provenance line stamped by setup. Grow it when reality demands, not before.
+Two to four small files plus a calibration pair, not a hundred. You control the resulting repo and its visibility. Every rule in it was approved by you — and every file says so, with a provenance line stamped by setup. Grow it when reality demands, not before.
 
 ## Quick start
 
-1. **Use this template** (GitHub → "Use this template") or clone it.
+1. **Use this template** (GitHub → "Use this template") or clone it. Start with a private repository unless every input and output is safe to publish.
 2. Open the repo in your agent.
 3. Say **"set up my writing system."**
-4. Answer the questions. Paste in anything useful when asked. Approve what the agent extracts.
+4. Answer the questions. Paste in material you have permission to use; approve what the agent extracts.
 5. Watch the before/after demo on your own copy — approve it, and it becomes your first calibration pair.
-6. Commit.
+6. Review the diff, then choose whether to commit it.
 
-Typical time: under 30 minutes.
+Target time: under 30 minutes. We're testing that target through real setup experiences.
+
+Before pasting style guides, customer copy, or other source material, read [Safety and privacy](SAFETY.md). Git history can preserve content after you delete it.
 
 ## After setup
 
-- Any agent that opens the repo consults your references before writing — and asks instead of guessing when your rules don't cover something.
-- Legally fixed wording sits under **"Exact wording"** headings that agents reproduce byte-for-byte, never paraphrase.
-- Switched models or harnesses? Re-run a calibration pair. If the rewrite drifts from what you approved, your references need attention — and you find out before your customers do.
-- Point an MCP writing server or skill at `references/` for retrieval across tools.
+- Agents that follow `AGENTS.md` consult your references before writing — and ask instead of guessing when your rules don't cover something.
+- Legally fixed wording sits under **"Exact wording"** headings that agents are instructed to reproduce byte-for-byte, never paraphrase.
+- Switched models or harnesses? Re-run a calibration pair. Drift may reveal a reference gap or a model or harness difference — either is worth finding before your customers do.
+- You can point a compatible writing server or skill at `references/` for retrieval across tools.
 - Re-run setup any time to revise. Approved rules only change when you change them; calibration pairs are append-only.
 
 ## Design principles
 
 1. **Minimal by default.** A few small files beat an empire of guidelines. Complexity is added by users, when they need it — never shipped.
 2. **Your rules, your words.** The agent drafts; you approve. Nothing enters your system unreviewed — and every file carries its provenance.
-3. **Prove it immediately.** Setup ends with your own copy rewritten with and without your system. The approved pair stays as a standing regression check.
+3. **Prove it immediately.** Setup ends with repository-safe copy rewritten with and without your system. The approved pair stays as a calibration check.
 4. **Honest agents.** No invented rules, no silently resolved conflicts, no paraphrased legal wording. When the system doesn't know, it says so and asks.
 5. **Plain files, no lock-in.** Markdown with light frontmatter. Readable by humans, consumable by any tool, portable forever.
 

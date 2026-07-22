@@ -1,6 +1,6 @@
 # references/
 
-This is where your writing system lives. It starts empty on purpose.
+This is where your writing system lives. It starts without generated references on purpose; this README is only a placeholder. If `voice.md` does not exist, setup has not run yet.
 
 Open this repo in your agent and say **"set up my writing system"** — the setup protocol will interview you and generate these files with your approval:
 
