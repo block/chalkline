@@ -1,107 +1,120 @@
 # Operability
 
-Chalkline sets up a small language system for writing: references agents can read, examples they can calibrate against, and gaps people can improve. This page explains the operating loop after setup.
+Chalkline sets up a small language system for writing: references agents can read, examples they can calibrate against, and gaps people can improve. This page is a guide for the people and integrations operating that system after setup.
 
-The goal is not to make the repository an authority over people. The goal is to make language guidance usable, inspectable, and improvable without copying it into every prompt or tool.
+The executable agent contract remains `AGENTS.md`, the generated references, and the calibration pairs. This guide does not make the repository an authority over people or prove that an agent followed its instructions. Its goal is to make language guidance usable, inspectable, and improvable without copying it into every prompt or tool.
 
 ## The loop
 
 ```text
-Set up -> consult -> apply -> report gaps -> revise -> recalibrate
+Set up -> consult -> surface gaps or conflicts -> draft or stop -> review and decide -> revise -> recalibrate
 ```
 
-1. **Set up:** the team approves a small set of references and one calibration pair.
-2. **Consult:** an agent reads the applicable references before writing or reviewing.
-3. **Apply:** the agent changes language while preserving supplied facts.
-4. **Report gaps:** the agent names missing coverage, conflicts, or exact wording it cannot safely handle.
-5. **Revise:** a person proposes reference changes; approved rules are changed by diff, not silently rewritten.
-6. **Recalibrate:** the team adds or re-runs calibration pairs when voice, model behavior, or harness behavior changes.
+1. **Set up:** a person approves a small set of language references and one calibration direction.
+2. **Consult:** an agent reads the references and calibration pairs that apply to the task.
+3. **Surface gaps or conflicts:** before resolving uncertain language, the agent names missing guidance, unavailable sources, conflicts, and unresolved facts.
+4. **Draft or stop:** when the supplied facts and applicable guidance are sufficient, the agent drafts while preserving those facts. Otherwise it asks, omits the unsupported claim, or stops.
+5. **Review and decide:** the appropriate person reviews the draft and any unresolved questions. Chalkline does not make legal, product, publication, or production-approval decisions.
+6. **Revise:** a person may propose reference changes; approved language guidance changes by visible diff, not silent rewrite.
+7. **Recalibrate:** the team re-runs applicable calibration pairs when guidance, models, prompts, or harnesses change. New pairs record a newly approved direction or new coverage—not merely a different model output.
 
-## What an agent should report
+## A suggested usage report
 
-When an agent uses a Chalkline repository for real work, it should be able to say:
+An agent or integration may provide a short self-report alongside its draft. This is operational metadata for a reviewer, not customer-facing copy and not proof of compliance.
 
-- which repository and revision it used, if the revision is available;
-- which reference files and calibration pair it read;
-- which `must` rules applied;
-- which exact wording blocks were preserved or left untouched;
-- which facts came from the user's request rather than the writing system;
-- which relevant guidance was missing, unavailable, or in conflict;
-- what needs a person before the work is treated as approved.
+When the harness can establish the information reliably, the report can name:
+
+- the repository and revision used, or that the working tree was uncommitted;
+- the reference files and applicable calibration pairs consulted;
+- the specific guidance applied, cited by file and heading;
+- exact wording blocks preserved or left untouched;
+- factual claims supplied for the task and any that remain unresolved;
+- relevant guidance that was missing, unavailable, or in conflict;
+- what review or authoritative input is needed before drafting continues or the work is used.
 
 Short version:
 
 ```text
-Used: references/voice.md, references/terminology.md, calibration/002-...
-Applied: 2 must rules, 4 should rules
+Used: references/voice.md, references/terminology.md, calibration/002-refund-reply.md
+Applied:
+- terminology.md — Refund states
+- voice.md — Support errors
 Preserved: exact wording in terminology.md
-Gaps: no support-channel rule for refunds
-Human needed: approve whether "refund pending" is a supported product state
+Gaps: the references do not say whether support copy may name back-office queue states
+Review needed: confirm the supported customer-facing product state from its authoritative source before drafting
 ```
 
 No finding is not the same as complete coverage. If an agent could not read a needed source, it should say so instead of treating silence as approval.
 
-## How gaps become better rules
+Keep usage reports separate from requested copy. They can expose private repository names, paths, source names, exact wording, product details, or conflicts. Before sharing one publicly, remove sensitive details or reproduce the behavior with synthetic material. Follow [Safety and privacy](SAFETY.md).
 
-A gap is useful evidence. Treat it as a proposed improvement, not as permission for the agent to invent policy.
+## How gaps become better guidance
+
+A gap is useful evidence. It is not permission for the agent to invent a fact or a rule.
 
 Good gap report:
 
 ```text
-The references do not say whether support replies should name back-office queue states. I avoided that term and used the customer-visible state instead.
+The references do not say whether support copy may name back-office queue states. I left the disputed state unresolved. Confirm the supported customer-facing state from the authoritative product source before drafting.
 ```
 
-Good follow-up:
+A person may then propose a candidate language rule:
 
 ```text
-Add a support-channel rule: "Use customer-visible states. Do not name back-office queue states unless support policy says to."
+Candidate for review: "Use customer-facing product states in support copy. Do not expose back-office queue states."
 ```
 
-The person maintaining the Chalkline repo decides whether that rule belongs in `references/channels.md`, `references/terminology.md`, a new calibration pair, or nowhere.
+The responsible owner first decides whether the candidate is true, authorized, and useful. Then they decide whether it belongs in `references/channels.md`, `references/terminology.md`, a new calibration pair, another authoritative system, or nowhere. Product facts stay with the source that owns them; Chalkline records language guidance, not product truth.
 
 ## Calibration as an operating check
 
-Calibration pairs are both examples and checks.
+Calibration pairs are examples and manual spot checks. They do not prove complete coverage, compliance, or identical output across models.
 
 Use them when:
 
 - setup finishes;
-- a team changes a major rule;
-- an agent model or harness changes;
+- a team changes a major language rule or approved direction;
+- an agent model, prompt, or harness changes;
 - output starts to feel off but the references look unchanged;
 - a new channel or audience is added.
 
-The check is deliberately manual:
+For a useful comparison:
 
-1. Give an agent the original sample and the current references.
-2. Ask it to rewrite the sample.
-3. Compare the result with the approved direction in the newest calibration pair.
-4. If it drifts, decide whether the issue is the model, the harness, the prompt, or a missing rule.
-5. Fix the reference gap or append a new calibration pair.
+1. Choose the newest applicable pair or pairs for the task's channel, audience, and purpose. If none applies, report a coverage gap.
+2. Keep the original request, task facts, references, and relevant settings fixed.
+3. Give an agent the original sample and current references without showing it the approved rewrite.
+4. Change one factor at a time—such as the model, prompt, or harness.
+5. Compare the result with the human-approved direction, not exact wording alone.
+6. Investigate retrieval failures, changed inputs or settings, model nondeterminism, harness behavior, and reference gaps before attributing drift.
+7. Change a reference or append a pair only after a person approves a changed direction or genuinely new coverage.
 
-Do not rewrite approved calibration pairs during ordinary revisions. Append a new pair so the history stays visible.
+See [`calibration/README.md`](calibration/README.md) for the full fixture contract. Approved pairs are append-only during ordinary revisions, but privacy, legal, copyright, and factual-correction needs override that history rule. Deleting a file does not remove it from Git history.
 
 ## What Chalkline does not own
 
-Chalkline records approved language guidance. It does not provide:
+Chalkline records approved language guidance and calibration direction within a declared scope. It does not provide:
 
+- product facts or source-of-truth data;
 - legal, compliance, accessibility, or localization approval;
+- production or publication approval;
 - identity, permission, or separation-of-duties checks;
 - publication, rollback, or delivery systems;
 - private corpus hosting;
 - telemetry about individual writers;
 - a guarantee that an agent or harness followed the instructions.
 
-Downstream tools can use Chalkline as a policy source, but they remain responsible for their own authorization, lifecycle, audit, and human-review boundaries.
+Downstream tools can use Chalkline as a language-guidance source, but they remain responsible for their own authorization, factual inputs, lifecycle, review, audit, and publication boundaries.
 
-## Why this scales
+## Scope and boundaries
 
-Small teams can run the loop in one repository. Larger organizations can run many Chalkline language systems by team, product, brand, or audience, as long as consumers keep the source and revision visible.
+A small team can run this loop in one repository. Separate teams, products, brands, or audiences can maintain separate repositories, but Chalkline does not yet define discovery, inheritance, freshness, or precedence across overlapping repositories.
+
+Keeping the source and revision visible establishes provenance; it does not establish which source has authority for a task. If multiple repositories apply or conflict, the integration should surface that uncertainty rather than silently composing them.
 
 The important boundary is simple:
 
 ```text
-Chalkline records current language guidance for a scoped writing system.
-People decide whether to approve, waive, publish, or change it.
-Other systems apply and verify it in their own lifecycle.
+Chalkline records current human-approved language guidance for a scoped writing system.
+People with the appropriate responsibility approve or change that guidance and review resulting drafts.
+Other systems own factual authority, production approval, publication, and verification in their own lifecycle.
 ```
