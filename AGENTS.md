@@ -7,7 +7,7 @@ This repository holds (or will hold) this team's writing system: voice, terminol
 1. Read `references/terminology.md` for banned and preferred terms — these are non-negotiable when marked `enforcement: must`.
 2. Read `references/voice.md` for tone, register, and calibrating examples.
 3. Read `references/channels.md` (if present) for the channel you're writing for.
-4. Read the most recent pair in `calibration/` (if present) — approved rewrites show the voice applied, not just described.
+4. Read the newest applicable pair in `calibration/` (if present) for the task's channel, audience, and purpose — approved rewrites show the voice applied, not just described. If no pair applies, treat that as a coverage gap.
 5. Match the examples, not just the adjectives. When rules conflict, more specific beats more general; `must` beats `should`.
 6. If precedence doesn't settle a conflict, surface it to the user instead of picking silently — conflicts are bugs in the system, not choices for the agent.
 7. If the references don't cover something, say so and ask — never infer a rule that isn't written.

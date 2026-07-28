@@ -23,10 +23,10 @@ Each file contains:
 ## What these are for
 
 1. **Calibration checks.** Switched models or harnesses? Re-run a pair: give an agent the original plus `references/` and compare its rewrite against the approved direction. Drift may reveal a reference gap or a model or harness difference.
-2. **Few-shot examples.** Approved rewrites show your voice *applied*, not just described. Agents consulting this repo read the most recent pair alongside the references.
+2. **Few-shot examples.** Approved rewrites show your voice *applied*, not just described. Agents consulting this repo read the newest pair that applies to the task's channel, audience, and purpose alongside the references. If no pair applies, that is a coverage gap.
 
 ## Rules
 
 - Preserve supplied facts. Writing guidance must never invent causes, states, dates, deadlines, guarantees, names, amounts, eligibility, or required actions.
 - Pairs are **append-only** for ordinary revisions. Privacy, legal, copyright, and factual-correction needs override that rule; remember that deleting a file does not remove it from Git history.
-- Every pair was human-approved at creation. If your voice changes, old pairs stay as history; the newest pair wins for calibration.
+- Every pair was human-approved at creation. If your voice changes, old pairs stay as history; the newest applicable pair wins for its channel, audience, and purpose.

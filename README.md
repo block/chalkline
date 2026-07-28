@@ -2,7 +2,7 @@
 
 **Snap a line before your agents build.**
 
-chalkline sets up a writing system your agents can actually use — in one conversation. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
+chalkline sets up a writing system your agents can actually use — a small language system for the places your team writes. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
 
 ## The problem
 
@@ -51,6 +51,7 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 - Agents that follow `AGENTS.md` consult your references before writing — and ask instead of guessing when your rules don't cover something.
 - Legally fixed wording sits under **"Exact wording"** headings that agents are instructed to reproduce byte-for-byte, never paraphrase.
 - Switched models or harnesses? Re-run a calibration pair. Drift may reveal a reference gap or a model or harness difference — either is worth finding before your customers do.
+- See [Operability](OPERABILITY.md) for keeping the language system useful: consult, apply, report gaps, revise, and recalibrate.
 - You can point a compatible writing server or skill at `references/` for retrieval across tools.
 - Re-run setup any time to revise. Approved rules only change when you change them; calibration pairs are append-only.
 
@@ -70,6 +71,7 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 
 - Not a style guide — it ships no opinions about how *you* should sound.
 - Not a grammar checker or writing model.
+- Not a complete language governance system.
 - Not a compliance tool. It records your judgment; it doesn't supply it.
 
 ## Contributing
