@@ -56,6 +56,20 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 - You can point a compatible writing server or skill at `references/` for retrieval across tools.
 - Re-run setup any time to revise. Approved rules only change when you change them; calibration pairs are append-only.
 
+## Point other repos at your system
+
+Your writing system is most useful when the repositories your team actually works in declare it. Add a **language pin** to any consuming repository's `AGENTS.md`:
+
+```text
+## Language
+
+This team's writing system is https://github.com/ORG/YOUR-LANG-REPO @ COMMIT.
+Before writing anything on this team's behalf, read that repository's AGENTS.md and follow it.
+If you cannot read that revision, say so and treat it as a gap — do not guess our voice.
+```
+
+If your system lives in a directory of the same repository, point the pin at that path instead. Agents working in a pinned repo consult your references at a known revision and can cite it in their usage reports. Update the commit deliberately — bumping the pin is how an approved language change reaches consuming repos. If more than one language repo could apply to a task, agents should surface that rather than compose them silently — see [Operability](OPERABILITY.md).
+
 ## Design principles
 
 1. **Minimal by default.** A few small files beat an empire of guidelines. Complexity is added by users, when they need it — never shipped.

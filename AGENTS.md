@@ -37,6 +37,14 @@ Text under an **"Exact wording"** heading is reproduced byte-for-byte — never 
 
 When you deliver a draft or review based on this repo, you may add the short usage report described in [OPERABILITY.md](OPERABILITY.md): what you consulted (and at which revision, if available), what you applied, what was missing, unavailable, or in conflict, and what needs review before the work is used. Keep the report separate from the requested copy — it is operational metadata for a reviewer, not proof of compliance, and never customer-facing text.
 
+## Language pins from other repositories
+
+Other repositories may declare this writing system with a **language pin** — a short block in their own `AGENTS.md` naming this repository and a commit (the README shows the block). If you were routed here by a pin:
+
+- Consult the pinned revision, not whatever is newest. If you cannot read that revision, say so and treat it as a gap — do not guess the team's voice from memory.
+- Name the repository and pinned revision in your usage report so a reviewer can reconstruct what you read.
+- If more than one language repo could apply to the task, surface that to the user instead of composing them silently — precedence across systems is a human decision.
+
 ## If the user asks to "set up my writing system" (or `references/voice.md` does not exist): run the setup protocol
 
 Follow `setup/PROTOCOL.md` exactly. Summary of the contract:

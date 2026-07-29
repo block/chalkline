@@ -98,6 +98,7 @@ Do not skip this phase. It is the moment the system earns trust.
    - *"When you switch models or harnesses, re-run the calibration pair — drift may reveal a reference gap or a model or harness difference, and that's worth knowing."*
    - *"When you want this available across tools, point an MCP writing server or skill at `references/`."*
    - *"OPERABILITY.md describes the loop after setup — consult, surface gaps, draft or stop, review, revise, recalibrate — and the usage report agents can give alongside drafts."*
+   - *"When you want the repos your team works in to use this system, add the language pin from the README to their AGENTS.md — agents there will consult your references at a known revision."*
 
 ## Re-running setup
 
