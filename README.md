@@ -2,11 +2,11 @@
 
 **Snap a line before your agents build.**
 
-chalkline sets up a writing system your agents can actually use — a small language system for the places your team writes. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
+Your team runs on language now: it's how you brief agents, how agents write to your customers, and what your product's words are supposed to mean. chalkline turns the part of that your team can actually agree on — voice, terminology, vocabulary, channel rules — into a small writing system agents consult instead of guess at. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
 
 ## The problem
 
-Your agents write now — support replies, product copy, lifecycle email, release notes. What they know about *your* voice is whatever happened to be in the prompt. Style guides live in PDFs and wikis that no tool consults. Teams that skip setup blame the tools for output that was never given the chance to be right.
+Your agents write now — support replies, product copy, lifecycle email, release notes. What they know about *your* voice is whatever happened to be in the prompt — and every new prompt, agent file, and skill restates that voice from memory, drifting a little each time. Style guides live in PDFs and wikis that no tool consults. Teams that skip setup blame the tools for output that was never given the chance to be right.
 
 ## What this is
 
