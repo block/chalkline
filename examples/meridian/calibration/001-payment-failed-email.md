@@ -30,3 +30,7 @@
 | One requested action remains | Email contains one action | `../references/channels.md` |
 | No exclamation points, “Oops,” “ASAP,” or reassurance boilerplate | Calm; never manufacture urgency or cheer | `../references/voice.md` |
 | No cause, deadline, payment state, or guarantee was added | Writing rules change language, never product facts | `../../../AGENTS.md` |
+
+## What this teaches
+
+When money is involved, say what happened and what action is needed without adding panic, cheer, or facts the original did not provide.

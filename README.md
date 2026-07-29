@@ -26,6 +26,7 @@ your-repo/
 ├── references/
 │   ├── voice.md           # how you sound, with real examples
 │   ├── terminology.md     # words you use, words you ban
+│   ├── vocabulary.md      # optional: how people ask for your terms in everyday language
 │   └── channels.md        # per-channel rules (only if you need them)
 └── calibration/
     └── 001-….md           # approved before/after pairs: calibration checks + few-shot examples
@@ -70,6 +71,7 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 ## What this is not
 
 - Not a style guide — it ships no opinions about how *you* should sound.
+- Not a tool for correcting how teammates speak.
 - Not a grammar checker or writing model.
 - Not a complete language governance system.
 - Not a compliance tool. It records your judgment; it doesn't supply it.
