@@ -4,7 +4,7 @@ This repository holds (or will hold) this team's writing system: voice, terminol
 
 ## If `references/voice.md` exists: consult before writing
 
-1. Read `references/terminology.md` for banned and preferred terms — these are non-negotiable when marked `enforcement: must`.
+1. Read `references/terminology.md` for banned and preferred terms — these are non-negotiable when marked `enforcement: must`, in the file's frontmatter or inline on a single rule (**must**).
 2. Read `references/voice.md` for tone, register, and calibrating examples.
 3. Read `references/vocabulary.md` (if present) to understand requests in the user's own words — it maps everyday phrases to the team's canonical terms.
 4. Read `references/channels.md` (if present) for the channel you're writing for.
@@ -69,6 +69,8 @@ enforcement: "should"     # must (non-negotiable) | should (default) | may (sugg
 ```
 
 Default everything to `should`. Only mark `must` when the user explicitly says a rule is non-negotiable (legal wording, banned terms, trademark usage). This keeps the files compatible with MCP writing servers and skills without asking the user to learn a schema.
+
+Frontmatter enforcement is the file's default. A single rule may be stronger than its file: mark it inline with (**must**) at the end of the rule, as the examples do. Inline marks carry the same bar as file-level `must` — the user said it's non-negotiable — and unmarked rules inherit the file default.
 
 For `references/vocabulary.md`, use `enforcement: "may"` unless the user explicitly wants teach-back to be stronger. Vocabulary helps conversation; terminology governs generated copy.
 
