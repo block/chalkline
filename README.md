@@ -51,7 +51,7 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 - Agents that follow `AGENTS.md` consult your references before writing — and ask instead of guessing when your rules don't cover something.
 - Legally fixed wording sits under **"Exact wording"** headings that agents are instructed to reproduce byte-for-byte, never paraphrase.
 - Switched models or harnesses? Re-run a calibration pair. Drift may reveal a reference gap or a model or harness difference — either is worth finding before your customers do.
-- See [Operability](OPERABILITY.md) for keeping the language system useful: consult, apply, report gaps, revise, and recalibrate.
+- See [Operability](OPERABILITY.md) for the loop that keeps the language system useful — consult, surface gaps or conflicts, draft or stop, review and decide, revise, recalibrate — and the short usage report agents can hand a reviewer.
 - You can point a compatible writing server or skill at `references/` for retrieval across tools.
 - Re-run setup any time to revise. Approved rules only change when you change them; calibration pairs are append-only.
 

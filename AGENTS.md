@@ -18,6 +18,10 @@ This repository holds (or will hold) this team's writing system: voice, terminol
 
 Text under an **"Exact wording"** heading is reproduced byte-for-byte — never paraphrased, truncated, reformatted, or improved, including during structural edits. Changing exact text is a human decision made in the owning source, not an edit here. When the canonical text lives elsewhere (legal, compliance, a disclosures repo), reference it by link rather than pasting a copy that can go stale.
 
+## Usage reports
+
+When you deliver a draft or review based on this repo, you may add the short usage report described in [OPERABILITY.md](OPERABILITY.md): what you consulted (and at which revision, if available), what you applied, what was missing, unavailable, or in conflict, and what needs review before the work is used. Keep the report separate from the requested copy — it is operational metadata for a reviewer, not proof of compliance, and never customer-facing text.
+
 ## If the user asks to "set up my writing system" (or `references/voice.md` does not exist): run the setup protocol
 
 Follow `setup/PROTOCOL.md` exactly. Summary of the contract:
