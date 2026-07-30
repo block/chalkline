@@ -29,6 +29,6 @@ Each file contains:
 
 ## Rules
 
-- Preserve supplied facts. Writing guidance must never invent causes, states, dates, deadlines, guarantees, names, amounts, eligibility, or required actions.
+- Preserve supplied facts — including their strength. Writing guidance must never invent causes, states, dates, deadlines, guarantees, names, amounts, eligibility, or required actions, and never soften or harden the ones supplied.
 - Pairs are **append-only** for ordinary revisions. Privacy, legal, copyright, and factual-correction needs override that rule; remember that deleting a file does not remove it from Git history.
 - Every pair was human-approved at creation. If your voice changes, old pairs stay as history; the newest applicable pair wins for its channel, audience, and purpose.

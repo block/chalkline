@@ -10,7 +10,7 @@ Your agents write now — support replies, product copy, lifecycle email, releas
 
 ## What this is
 
-A template repository plus a conversational setup protocol. Open your copy in any capable agent (goose, Claude Code, Codex, or another AGENTS.md-aware harness) and say:
+A template repository plus a conversational setup protocol. Open your copy in any capable agent (goose, Codex, Claude Code, or another agent that reads repo instruction files) and say:
 
 > **"Set up my writing system."**
 
@@ -23,6 +23,7 @@ No CLI to install. No schema to learn. No rules to hand-write unless you want to
 ```text
 your-repo/
 ├── AGENTS.md              # how agents consult your writing system
+├── CLAUDE.md              # one-line bridge for agents that read CLAUDE.md instead
 ├── references/
 │   ├── voice.md           # how you sound, with real examples
 │   ├── terminology.md     # words you use, words you ban
@@ -69,6 +70,8 @@ If you cannot read that revision, say so and treat it as a gap — do not guess 
 ```
 
 If your system lives in a directory of the same repository, point the pin at that path instead. Agents working in a pinned repo consult your references at a known revision and can cite it in their usage reports. Update the commit deliberately — bumping the pin is how an approved language change reaches consuming repos. If more than one language repo could apply to a task, agents should surface that rather than compose them silently — see [Operability](OPERABILITY.md).
+
+Put the pin where the consuming repo's agents actually read. Not every agent reads `AGENTS.md` — Claude Code, for example, reads `CLAUDE.md`. This template ships a one-line `CLAUDE.md` that defers to `AGENTS.md`; give consuming repos the same bridge (or add the pin to both files), and check the instruction-file conventions of whatever agents your team runs. A pin an agent never reads is a system that silently doesn't exist.
 
 ## Design principles
 

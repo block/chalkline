@@ -12,7 +12,7 @@ This repository holds (or will hold) this team's writing system: voice, terminol
 6. Match the examples, not just the adjectives. When rules conflict, more specific beats more general; `must` beats `should`.
 7. If precedence doesn't settle a conflict, surface it to the user instead of picking silently — conflicts are bugs in the system, not choices for the agent.
 8. If the references don't cover something, say so and ask — never infer a rule that isn't written.
-9. References govern language, not facts. Never invent or infer product state, causes, dates, deadlines, guarantees, names, amounts, eligibility, or required actions. Ask for missing facts or omit them.
+9. References govern language, not facts. Never invent or infer product state, causes, dates, deadlines, guarantees, names, amounts, eligibility, or required actions. Ask for missing facts or omit them. Preserving a fact includes its strength: a consequence stated as certain stays certain, a possibility stays a possibility — "we will suspend" never becomes "we may pause."
 10. Never present output as "on brand" if you could not read the references.
 
 ## Vocabulary and teach-back
