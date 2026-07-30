@@ -31,4 +31,6 @@ Each file contains:
 
 - Preserve supplied facts — including their strength. Writing guidance must never invent causes, states, dates, deadlines, guarantees, names, amounts, eligibility, or required actions, and never soften or harden the ones supplied.
 - Pairs are **append-only** for ordinary revisions. Privacy, legal, copyright, and factual-correction needs override that rule; remember that deleting a file does not remove it from Git history.
-- Every pair was human-approved at creation. If your voice changes, old pairs stay as history; the newest applicable pair wins for its channel, audience, and purpose.
+- Approval of an ordinary artifact does not approve it as a calibration pair. A person must explicitly approve the rewrite as reusable direction for its stated channel, audience, and purpose.
+- A new pair records genuinely new coverage or a newly approved direction—not every accepted draft or different model output. If a pair suggests a general rule, propose that rule separately; an example never silently promotes itself into policy.
+- Approved pairs stay as history. If your voice changes, the newest applicable pair wins for its channel, audience, and purpose.

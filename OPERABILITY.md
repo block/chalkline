@@ -7,7 +7,7 @@ The executable agent contract remains `AGENTS.md`, the generated references, and
 ## The loop
 
 ```text
-Set up -> consult -> surface gaps or conflicts -> draft or stop -> review and decide -> revise -> recalibrate
+Set up -> consult -> surface gaps or conflicts -> draft or stop -> review and decide -> revise -> recalibrate -> observe
 ```
 
 1. **Set up:** a person approves a small set of language references and one calibration direction.
@@ -17,6 +17,9 @@ Set up -> consult -> surface gaps or conflicts -> draft or stop -> review and de
 5. **Review and decide:** the appropriate person reviews the draft and any unresolved questions. Chalkline does not make legal, product, publication, or production-approval decisions.
 6. **Revise:** a person may propose reference changes; approved language guidance changes by visible diff, not silent rewrite.
 7. **Recalibrate:** the team re-runs applicable calibration pairs when guidance, models, prompts, or harnesses change. New pairs record a newly approved direction or new coverage—not merely a different model output.
+8. **Observe:** on the next comparable task, check whether the original gap disappeared without creating a new conflict, factual error, or review burden.
+
+See [Learning without self-governance](LEARNING.md) for turning observations into reviewed changes, calibrated checks, and deliberate pin updates — never automatic policy.
 
 ## A suggested usage report
 

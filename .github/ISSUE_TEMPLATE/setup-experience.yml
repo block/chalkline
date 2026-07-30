@@ -36,6 +36,9 @@ body:
         - Prove it
         - Review and commit
         - Revision of an existing system
+        - Use from a consuming repository
+        - Calibration or harness check
+        - Language-pin rollout
     validations:
       required: true
   - type: input
@@ -56,6 +59,16 @@ body:
       label: What did you expect?
     validations:
       required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Public-safe reproduction
+      description: Optional. Give the smallest synthetic or redacted steps another person could run. Do not include your real rules or source copy.
+  - type: textarea
+    id: check
+    attributes:
+      label: What would show the problem is fixed?
+      description: Optional. Name the behavior you expected to see on the next run; you do not need to propose a solution.
   - type: checkboxes
     id: safety
     attributes:
