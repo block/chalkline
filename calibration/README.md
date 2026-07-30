@@ -18,12 +18,14 @@ Each file contains:
 - **With the system** — the rewrite consulting `references/`
 - **Baseline method** — how the no-system version was produced; if no clean session was available, say the comparison is informal
 - **What drove the difference** — the specific rules, by file
+- **What this teaches** — the one lesson a new teammate should take from the pair
 - **Approved** — date the user said "yes, that sounds like us"
 
 ## What these are for
 
 1. **Calibration checks.** Switched models or harnesses? Re-run a pair: give an agent the original plus `references/` and compare its rewrite against the approved direction. Drift may reveal a reference gap or a model or harness difference.
 2. **Few-shot examples.** Approved rewrites show your voice *applied*, not just described. Agents consulting this repo read the newest pair that applies to the task's channel, audience, and purpose alongside the references. If no pair applies, that is a coverage gap.
+3. **Teaching artifacts.** A pair should make one lesson visible to a new teammate, not only to a model.
 
 ## Rules
 

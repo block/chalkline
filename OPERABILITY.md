@@ -109,6 +109,8 @@ Downstream tools can use Chalkline as a language-guidance source, but they remai
 
 A small team can run this loop in one repository. Separate teams, products, brands, or audiences can maintain separate repositories, but Chalkline does not yet define discovery, inheritance, freshness, or precedence across overlapping repositories.
 
+The supported way for another repository to consume a Chalkline system is the **language pin** described in the README: a short block in the consuming repo's `AGENTS.md` naming the language repository and a commit. The pin makes consumption inspectable — an agent consults a known revision and can cite it in its usage report — and makes language changes deliberate, because someone bumps the commit rather than inheriting whatever is newest.
+
 Keeping the source and revision visible establishes provenance; it does not establish which source has authority for a task. If multiple repositories apply or conflict, the integration should surface that uncertainty rather than silently composing them.
 
 The important boundary is simple:

@@ -2,11 +2,11 @@
 
 **Snap a line before your agents build.**
 
-chalkline sets up a writing system your agents can actually use — a small language system for the places your team writes. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
+Your team runs on language now: it's how you brief agents, how agents write to your customers, and what your product's words are supposed to mean. chalkline turns the part of that your team can actually agree on — voice, terminology, vocabulary, channel rules — into a small writing system agents consult instead of guess at. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
 
 ## The problem
 
-Your agents write now — support replies, product copy, lifecycle email, release notes. What they know about *your* voice is whatever happened to be in the prompt. Style guides live in PDFs and wikis that no tool consults. Teams that skip setup blame the tools for output that was never given the chance to be right.
+Your agents write now — support replies, product copy, lifecycle email, release notes. What they know about *your* voice is whatever happened to be in the prompt — and every new prompt, agent file, and skill restates that voice from memory, drifting a little each time. Style guides live in PDFs and wikis that no tool consults. Teams that skip setup blame the tools for output that was never given the chance to be right.
 
 ## What this is
 
@@ -26,6 +26,7 @@ your-repo/
 ├── references/
 │   ├── voice.md           # how you sound, with real examples
 │   ├── terminology.md     # words you use, words you ban
+│   ├── vocabulary.md      # optional: how people ask for your terms in everyday language
 │   └── channels.md        # per-channel rules (only if you need them)
 └── calibration/
     └── 001-….md           # approved before/after pairs: calibration checks + few-shot examples
@@ -51,9 +52,23 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 - Agents that follow `AGENTS.md` consult your references before writing — and ask instead of guessing when your rules don't cover something.
 - Legally fixed wording sits under **"Exact wording"** headings that agents are instructed to reproduce byte-for-byte, never paraphrase.
 - Switched models or harnesses? Re-run a calibration pair. Drift may reveal a reference gap or a model or harness difference — either is worth finding before your customers do.
-- See [Operability](OPERABILITY.md) for keeping the language system useful: consult, apply, report gaps, revise, and recalibrate.
+- See [Operability](OPERABILITY.md) for the loop that keeps the language system useful — consult, surface gaps or conflicts, draft or stop, review and decide, revise, recalibrate — and the short usage report agents can hand a reviewer.
 - You can point a compatible writing server or skill at `references/` for retrieval across tools.
 - Re-run setup any time to revise. Approved rules only change when you change them; calibration pairs are append-only.
+
+## Point other repos at your system
+
+Your writing system is most useful when the repositories your team actually works in declare it. Add a **language pin** to any consuming repository's `AGENTS.md`:
+
+```text
+## Language
+
+This team's writing system is https://github.com/ORG/YOUR-LANG-REPO @ COMMIT.
+Before writing anything on this team's behalf, read that repository's AGENTS.md and follow it.
+If you cannot read that revision, say so and treat it as a gap — do not guess our voice.
+```
+
+If your system lives in a directory of the same repository, point the pin at that path instead. Agents working in a pinned repo consult your references at a known revision and can cite it in their usage reports. Update the commit deliberately — bumping the pin is how an approved language change reaches consuming repos. If more than one language repo could apply to a task, agents should surface that rather than compose them silently — see [Operability](OPERABILITY.md).
 
 ## Design principles
 
@@ -70,6 +85,7 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 ## What this is not
 
 - Not a style guide — it ships no opinions about how *you* should sound.
+- Not a tool for correcting how teammates speak.
 - Not a grammar checker or writing model.
 - Not a complete language governance system.
 - Not a compliance tool. It records your judgment; it doesn't supply it.

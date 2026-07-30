@@ -29,17 +29,17 @@ Ask these in order, adapting naturally to what they've already told you:
 1. **What does your company or team make, and who do you talk to?**
    *(Gives you brand slug, audience, and register baseline.)*
 2. **If your writing were a person, what three words describe how it sounds?**
-   *(Probe each adjective once: "Confident like a pilot's announcement, or confident like a friend who knows the way?")*
+   *(Probe each adjective once: "Confident like a pilot's announcement, or confident like a friend who knows the way?" Skip any probe the answer already settled — one question at a time never means re-asking what's been answered.)*
 3. **What words or phrases do you never want used? What do competitors say that you'd hate to sound like?**
    *(Seeds the banned list.)*
-4. **What words do you deliberately use — product names, feature names, terms of art? Any that people constantly get wrong?**
-   *(Seeds preferred terms and casing rules.)*
+4. **What words do you deliberately use — product names, feature names, terms of art? Which ones have everyday phrases people use instead?**
+   *(Seeds preferred terms and casing rules. Everyday phrases can seed `vocabulary.md`, the map that helps agents understand people in their own words. Record them as natural language, not mistakes. If the user says people "get it wrong," keep the phrase but drop the judgment.)*
 5. **Paste one example of your writing you love, and one you hate.**
    *(The single highest-value input. Extract voice attributes from the contrast and read them back for confirmation.)*
 6. **Where does your writing show up?** (product UI, email, support, social, docs)
-   *(Only channels they name get a section in channels.md. If they say "everywhere" or shrug, skip channels.md entirely.)*
+   *(Create channels.md only when channel-specific rules actually surface — naming the places writing shows up isn't enough. If they say "everywhere," shrug, or list channels without different rules for them, skip channels.md and treat per-channel guidance as a gap for later.)*
 7. **Is any wording legally or contractually fixed — disclosures, trademarks, regulated claims?**
-   *(Anything here becomes `enforcement: must` and goes under an **"Exact wording"** heading — see Phase 3. Flag it: "Your agents will treat this as non-negotiable and reproduce it exactly. Legal wording itself should live with whoever owns it — link it rather than paste it if it changes.")*
+   *(Anything here becomes `enforcement: must` and goes under an **"Exact wording"** heading — see Phase 3. Flag it: "Your agents will treat this as non-negotiable and reproduce it exactly. Legal wording itself should live with whoever owns it — link it rather than paste it if it changes." Ask where the canonical copy lives and record a stable link or path; when it exists only on paper, paste the sentence and name the owning source so changes happen there first.)*
 
 ## Phase 2 — Ingest (optional)
 
@@ -49,8 +49,10 @@ For each artifact provided:
 
 1. Extract candidate rules (terms, patterns, tone markers) — at most 10 per artifact, highest-confidence first.
 2. Present them as a checklist: *"From your style guide I'd keep these 7 rules. Approve, edit, or drop each."*
-3. Only approved items enter the system. Record nothing silently.
+3. Only approved items enter the system. Record nothing silently. A rule the user edits counts as approved, as edited.
 4. Keep count of what was proposed and what was approved, per source — the provenance footer in Phase 3 reports it.
+5. When a candidate is a product fact — prices, hours, durations, mechanics, eligibility — don't offer it as a writing rule. Say where it belongs: the team's product docs or source of truth. References govern language, never facts.
+6. Treat patterns inferred from absence (no emoji anywhere, no questions, no contractions) as weak candidates: name the inference when proposing them, and drop them without argument.
 
 If they have nothing, say so is fine and move on — the interview alone is enough for v1.
 
@@ -61,6 +63,7 @@ Create files under `references/`, using the frontmatter contract in AGENTS.md:
 - **`voice.md`** — always. The three adjectives *with their probed meanings*, the loved/hated examples with a one-line "why" each, and 3–5 do/don't pairs derived from the interview.
 - **`terminology.md`** — always. Two tables: *use this* (term, casing, context) and *never this* (term, what to say instead). Mark banned terms `enforcement: must` only if the user called them non-negotiable.
 - **`channels.md`** — only if Phase 1 Q6 named specific channels. One short section per named channel.
+- **`vocabulary.md`** — only if Phase 1 Q4 surfaced canonical terms *and* everyday phrases people use for them. Three columns: canonical term, what people often say, and a one-line teach-back written in the team's register. Use `enforcement: "may"`, add `teaching: "on"` by default, and state that any teammate may turn teaching `"off"`. State the boundary at the top: this file governs conversation, not output; `terminology.md` stays the authority for generated copy; teach-back phrasing never appears inside a deliverable; and the map is not a record of anyone's mistakes. When one everyday phrase maps to more than one canonical term, add a one-line disambiguation note — agents read context or ask instead of assuming. If the interview produced no phrase pairs, skip the file. Never invent how people talk.
 - **`AGENTS.md`** (repo root) — regenerate the "consult before writing" section so it names the actual files and the user's brand slug.
 
 Additional generation rules:
@@ -79,22 +82,25 @@ Hard limits: no file over ~80 lines; no rules the user didn't state or approve; 
 1. Ask for a short sample that is safe to store in the repository—redacted or synthetic is fine. Do not save personal, customer, confidential, or unauthorized material.
 2. Create the no-system baseline in a clean agent session that receives only the sample and the writing request. If a clean session is unavailable, say the comparison is informal; never claim the current agent has forgotten the interview.
 3. Rewrite the sample while consulting the new references.
-4. Preserve every supplied fact in both rewrites. References may change language, never product truth. Do not add causes, states, dates, deadlines, guarantees, names, amounts, eligibility, or required actions that the sample did not supply.
+4. Preserve every supplied fact in both rewrites. References may change language, never product truth. Do not add causes, states, dates, deadlines, guarantees, names, amounts, eligibility, or required actions that the sample did not supply. When a supplied fact is ambiguous (a date like "06/02," an unlabeled amount), ask or keep the original form — reformatting is language, reinterpreting is a fact decision.
 5. Show both versions side by side and point at the specific rules that drove each difference. State how the baseline was produced.
 6. Ask: **"Does the second one sound like you?"** If no — that's a rule gap. Fix the references, not the sample, and re-run.
-7. When they say yes, **save the pair** as `calibration/001-<short-slug>.md` containing: the original, the no-system baseline, the rewrite with the system, the baseline method, the rules that drove each difference, and the approval date. This is the system's first calibration fixture and its first few-shot example.
+7. When they say yes, **save the pair** as `calibration/001-<short-slug>.md` containing: the original, the no-system baseline, the rewrite with the system, the baseline method, the rules that drove each difference, a one-line **"What this teaches"** note, and the approval date. This is the system's first calibration fixture, first few-shot example, and first teaching artifact.
 
 Do not skip this phase. It is the moment the system earns trust.
 
 ## Phase 5 — Review and commit
 
 1. Summarize what was created and where — references, the calibration pair, and the provenance footers.
-2. Show the complete diff and flag anything that could be sensitive in a public repository. Propose a commit message listing the files and noting that the rules were human-approved.
-3. Ask explicitly whether the user wants you to commit. Do not commit until they approve the diff and commit action. Never push unless they make a separate explicit request.
-4. Tell them the growth paths, one line each:
+2. If `vocabulary.md` was generated, flag the teaching boundary: it teaches canonical terms in conversation only, any teammate may turn teaching off, and everyday phrases are not mistakes.
+3. Show the complete diff with a one-line-per-file summary (what it is, how many rules, which are must) — the summary makes review feasible; the diff keeps it honest. Flag anything that could be sensitive in a public repository. Propose a commit message listing the files and noting that the rules were human-approved.
+4. Ask explicitly whether the user wants you to commit. Do not commit until they approve the diff and commit action. Never push unless they make a separate explicit request.
+5. Tell them the growth paths, one line each:
    - *"Agents that follow this repo's AGENTS.md can now consult your rules — try it in your next session."*
    - *"When you switch models or harnesses, re-run the calibration pair — drift may reveal a reference gap or a model or harness difference, and that's worth knowing."*
    - *"When you want this available across tools, point an MCP writing server or skill at `references/`."*
+   - *"OPERABILITY.md describes the loop after setup — consult, surface gaps, draft or stop, review, revise, recalibrate — and the usage report agents can give alongside drafts."*
+   - *"When you want the repos your team works in to use this system, add the language pin from the README to their AGENTS.md — agents there will consult your references at a known revision."*
 
 ## Re-running setup
 
