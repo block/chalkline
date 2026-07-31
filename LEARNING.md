@@ -8,13 +8,13 @@ Use -> notice -> propose -> decide -> change -> calibrate -> distribute -> obser
 
 Each step produces a different kind of record:
 
-1. **Use:** an agent consults a pinned writing system for a real task.
+1. **Use:** an agent consults a reviewed repository-local language snapshot or local writing system for a real task.
 2. **Notice:** a person or agent reports a missing rule, conflict, retrieval failure, factual boundary, or calibration drift.
 3. **Propose:** someone writes the smallest candidate change and links the public-safe evidence that motivated it.
 4. **Decide:** the responsible person approves, edits, rejects, or routes the proposal elsewhere. An approved draft is not automatically a rule.
 5. **Change:** approved language guidance changes by visible diff. Existing calibration pairs remain history unless privacy, legal, copyright, or factual-correction needs require removal.
 6. **Calibrate:** re-run an applicable pair with one changed factor. Add a pair only for newly approved direction or genuinely new coverage.
-7. **Distribute:** consuming repositories deliberately bump their language pins. No consumer silently inherits the newest revision.
+7. **Distribute:** consuming owners deliberately update their validated source record and reviewed local snapshot. No consumer or drafting agent silently inherits the newest upstream revision.
 8. **Observe:** check the next comparable task. Did the gap disappear without creating a new conflict, factual error, or review burden?
 
 ## A small learning record
@@ -42,7 +42,7 @@ One person may hold more than one role, but one decision never implies the next.
 1. **Approve this artifact for use.**
 2. **Approve this artifact as reusable calibration direction** for a stated channel, audience, and purpose.
 3. **Approve a normative reference change.**
-4. **Approve deployment to a consuming repository** by bumping its language pin.
+4. **Approve deployment to a consuming repository** by updating its validated source record and reviewed local snapshot.
 
 Before a source or snapshot change, follow [PINNING.md](PINNING.md): a human reviewer or trusted integration independently resolves the canonical source and full revision, rejects operational directives, and projects only declarative language data into a reviewed local snapshot. Drafting agents never interpret the external instruction repository. Test the candidate snapshot in the actual consuming harness on a held-out comparable sample; run an unchanged control; predeclare the failure criterion; and keep the previous known-good source and snapshot. Never use the agent's usage report as verification. Do not deploy if the candidate is unreadable, changes factual strength, misses applicable calibration, creates an unresolved conflict, or cannot be rolled back. The guidance owner approves the change; the consuming owner approves deployment.
 
@@ -50,7 +50,7 @@ Before a source or snapshot change, follow [PINNING.md](PINNING.md): a human rev
 
 Prefer changes that make the system:
 
-- **more used:** a consumer can actually find and read the pinned guidance;
+- **more used:** a consumer can actually find and read its reviewed local guidance;
 - **more effective:** an applicable calibration direction steers the output;
 - **more honest:** missing facts, unavailable sources, conflicts, and human boundaries stay visible;
 - **less burdensome:** one shared agreement replaces repeated prompt-writing, correction, or review;
@@ -58,7 +58,7 @@ Prefer changes that make the system:
 
 The cheapest useful measures are task-level, not person-level:
 
-- Was the pinned revision readable?
+- Was the reviewed local snapshot present with its required source record?
 - Was an applicable calibration pair available?
 - Did the output preserve supplied facts and non-negotiable wording?
 - Did the same gap recur across the comparable samples selected before rollout?
