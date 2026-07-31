@@ -19,7 +19,7 @@ This project improves through **setup experiences**, not style opinions.
 
 - This repository and its issues are public. Never submit private writing rules, raw source documents, customer or personal data, confidential material, secrets, or private links. Reproduce failures with fictional or redacted material.
 - Submit only material you have permission to publish under this project's license.
-- Every PR needs a one-line answer to: *what observed experience does this improve, and what check would show the change worked?*
+- Every PR needs a one-line answer to: *what observed experience does this improve?* Behavior changes also need an executed held-out reproduction and unchanged control with exact versions and failure criteria. A future check is not verification; consequential private failures may use a maintainer-approved evidence exception and the smallest safe synthetic regression.
 - Protocol changes are reviewed by one content/design maintainer and one technical maintainer.
 - Sign your commits (DCO): `git commit -s`.
 

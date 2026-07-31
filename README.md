@@ -14,7 +14,7 @@ A template repository plus a conversational setup protocol. Open your copy in an
 
 > **"Set up my writing system."**
 
-The agent interviews you, optionally learns from material you already have (style guides, past campaigns, app strings), and generates a small set of reference files — **your** voice, **your** terms, **your** rules — that any agent can consult from then on. Setup ends with proof: your own copy rewritten with and without the system, and the approved pair saved as your first calibration check.
+The agent interviews you, optionally learns from material you already have (style guides, past campaigns, app strings), and generates a small set of reference files — **your** voice, **your** terms, **your** rules — that any agent can consult from then on. Setup ends with a visible comparison: your own copy rewritten with and without the system. If you separately approve that direction as reusable for a stated scope, the pair becomes your first few-shot example; it is not a held-out effectiveness test.
 
 No CLI to install. No schema to learn. No rules to hand-write unless you want to.
 
@@ -33,7 +33,7 @@ your-repo/
     └── 001-….md           # approved before/after pairs: calibration checks + few-shot examples
 ```
 
-Two to four small files plus a calibration pair, not a hundred. You control the resulting repo and its visibility. Every rule in it was approved by you — and every file says so, with a provenance line stamped by setup. Grow it when reality demands, not before.
+Two to four small files plus an optional calibration pair, not a hundred. You control the resulting repo and its visibility. Every rule records approval by the setup participant for the repository's stated scope; that provenance does not claim organization-wide authority. Grow it when reality demands, not before.
 
 ## Quick start
 
@@ -41,7 +41,7 @@ Two to four small files plus a calibration pair, not a hundred. You control the 
 2. Open the repo in your agent.
 3. Say **"set up my writing system."**
 4. Answer the questions. Paste in material you have permission to use; approve what the agent extracts.
-5. Watch the before/after demo on your own copy — approve it, and it becomes your first calibration pair.
+5. Watch the before/after demo on your own copy. Approve the artifact and, separately, decide whether its direction should become a reusable, scoped calibration pair.
 6. Review the diff, then choose whether to commit it.
 
 Target time: under 30 minutes. We're testing that target through real setup experiences.
@@ -51,33 +51,23 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 ## After setup
 
 - Agents that follow `AGENTS.md` consult your references before writing — and ask instead of guessing when your rules don't cover something.
-- Legally fixed wording sits under **"Exact wording"** headings that agents are instructed to reproduce byte-for-byte, never paraphrase.
-- Switched models or harnesses? Re-run a calibration pair. Drift may reveal a reference gap or a model or harness difference — either is worth finding before your customers do.
+- Fixed wording sits under scoped **"Exact wording"** headings with its owner, locale/jurisdiction, audience/context, and required review. Agents reproduce it byte-for-byte only when that scope matches; shared wording never overrides applicable legal, accessibility, or localization authority.
+- Switched models or harnesses? Run a held-out calibration check: hide the target pair's approved rewrite from the tested agent and add an unseen comparable sample before claiming broader improvement. Drift may reveal a reference gap, target leakage, or a model or harness difference.
 - See [Operability](OPERABILITY.md) for the loop that keeps the language system useful and the short usage report agents can hand a reviewer. [Learning without self-governance](LEARNING.md) shows how evidence becomes a reviewed change, calibration check, deliberate pin update, and observation — never automatic policy.
 - You can point a compatible writing server or skill at `references/` for retrieval across tools.
 - Re-run setup any time to revise. Approved rules only change when you change them; calibration pairs are append-only.
 
 ## Point other repos at your system
 
-Your writing system is most useful when the repositories your team actually works in declare it. Add a **language pin** to any consuming repository's `AGENTS.md`:
+Your writing system is most useful when the repositories your team actually works in declare it. The [Language-pin trust contract](PINNING.md) records the exact canonical source and full immutable commit, but drafting agents **do not fetch or follow external instruction files**. A human reviewer or trusted integration validates the source and projects only declarative language data into a reviewed, repository-local snapshot.
 
-```text
-## Language
-
-This team's writing system is https://github.com/ORG/YOUR-LANG-REPO @ COMMIT.
-Before writing anything on this team's behalf, read that repository's AGENTS.md and follow it.
-If you cannot read that revision, say so and treat it as a gap — do not guess our voice.
-```
-
-If your system lives in a directory of the same repository, point the pin at that path instead. Agents working in a pinned repo consult your references at a known revision and can cite it in their usage reports. Update the commit deliberately — bumping the pin is how an approved language change reaches consuming repos. If more than one language repo could apply to a task, agents should surface that rather than compose them silently — see [Operability](OPERABILITY.md).
-
-Put the pin where the consuming repo's agents actually read. Not every agent reads `AGENTS.md` — Claude Code, for example, reads `CLAUDE.md`. This template ships a one-line `CLAUDE.md` that defers to `AGENTS.md`; give consuming repos the same bridge (or add the pin to both files), and check the instruction-file conventions of whatever agents your team runs. A pin an agent never reads is a system that silently doesn't exist.
+This hard boundary follows an adversarial result: a tool-capable agent read a sentinel before deciding an upstream directive was out of scope. Prose cannot reliably sandbox other prose once both enter the same model context. Until a consumer has a validator, a human consuming owner copies reviewed language data into a local snapshot, records source/revision/digest/previous version plus their verification attestation, and reviews each update by diff. Drafting agents check that this local record exists; they never fetch upstream or pretend to verify it themselves.
 
 ## Design principles
 
 1. **Minimal by default.** A few small files beat an empire of guidelines. Complexity is added by users, when they need it — never shipped.
 2. **Your rules, your words.** The agent drafts; you approve. Nothing enters your system unreviewed — and every file carries its provenance.
-3. **Prove it immediately.** Setup ends with repository-safe copy rewritten with and without your system. The approved pair stays as a calibration check.
+3. **Make the preference visible immediately.** Setup ends with repository-safe copy rewritten with and without your system. If separately approved as reusable direction, the pair becomes a few-shot example; a held-out sample is required before claiming broader usefulness.
 4. **Honest agents.** No invented rules, no silently resolved conflicts, no paraphrased legal wording. When the system doesn't know, it says so and asks.
 5. **Plain files, no lock-in.** Markdown with light frontmatter. Readable by humans, consumable by any tool, portable forever.
 

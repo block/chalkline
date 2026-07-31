@@ -83,19 +83,20 @@ Use them when:
 
 For a useful comparison:
 
-1. Choose the newest applicable pair or pairs for the task's channel, audience, and purpose. If none applies, report a coverage gap.
+1. Choose the active pair with the most specific matching channel, audience, and purpose. Ignore superseded or withdrawn pairs. If equally specific active pairs conflict and neither supersedes the other, stop and report the conflict; never choose by filename or date.
 2. Keep the original request, task facts, references, and relevant settings fixed.
-3. Give an agent the original sample and current references without showing it the approved rewrite.
-4. Change one factor at a time—such as the model, prompt, or harness.
-5. Compare the result with the human-approved direction, not exact wording alone.
-6. Investigate retrieval failures, changed inputs or settings, model nondeterminism, harness behavior, and reference gaps before attributing drift.
-7. Change a reference or append a pair only after a person approves a changed direction or genuinely new coverage.
+3. Hold out the target pair from the tested agent: give it the original sample and applicable references, but not that pair's approved rewrite, rationale, or lesson. A pair used as few-shot context cannot validate the same run.
+4. Add an unseen but comparable sample when claiming improvement beyond the fitted setup example.
+5. Change one factor at a time—such as the reference revision, model, prompt, or harness—and run an unchanged control. Record known inputs, revisions, harness/model settings, and missing metadata.
+6. Compare the result with the explicitly approved direction, not exact wording alone. Predeclare the failure criterion; a single favorable run is an observation, not causal proof.
+7. Investigate target leakage, retrieval failures, changed inputs or settings, model nondeterminism, harness behavior, and reference gaps before attributing drift.
+8. Change a reference or append a pair only after a person approves a changed direction or genuinely new coverage.
 
 See [`calibration/README.md`](calibration/README.md) for the full fixture contract. Approved pairs are append-only during ordinary revisions, but privacy, legal, copyright, and factual-correction needs override that history rule. Deleting a file does not remove it from Git history.
 
 ## What Chalkline does not own
 
-Chalkline records approved language guidance and calibration direction within a declared scope. It does not provide:
+Chalkline records participant-approved language guidance and calibration direction within a declared scope. It does not establish the participant's mandate or provide:
 
 - product facts or source-of-truth data;
 - legal, compliance, accessibility, or localization approval;
@@ -112,14 +113,15 @@ Downstream tools can use Chalkline as a language-guidance source, but they remai
 
 A small team can run this loop in one repository. Separate teams, products, brands, or audiences can maintain separate repositories, but Chalkline does not yet define discovery, inheritance, freshness, or precedence across overlapping repositories.
 
-The supported way for another repository to consume a Chalkline system is the **language pin** described in the README: a short block in the consuming repo's `AGENTS.md` naming the language repository and a commit. The pin makes consumption inspectable — an agent consults a known revision and can cite it in its usage report — and makes language changes deliberate, because someone bumps the commit rather than inheriting whatever is newest.
+The supported cross-repository shape is the consumer-side trust contract in [PINNING.md](PINNING.md): exact canonical source identity, full immutable commit hash, consuming-owner or integration validation outside the drafting session, a reviewed repository-local snapshot containing only declarative language data, a local verification attestation, held-out checking, and a previous known-good source and snapshot. Drafting agents check the local record; they never fetch or follow external instruction repositories or claim independent verification.
 
-Keeping the source and revision visible establishes provenance; it does not establish which source has authority for a task. If multiple repositories apply or conflict, the integration should surface that uncertainty rather than silently composing them.
+Keeping the source and revision visible establishes provenance; it does not establish trust, authority, freshness, or that an agent actually read the content. A usage report is never verification. Chalkline has no global consumer registry or revocation mechanism; consuming repositories own rollout and recovery, and language owners must state when their known-consumer view is incomplete. If multiple repositories apply or conflict, stop and surface that uncertainty rather than silently composing them.
 
 The important boundary is simple:
 
 ```text
-Chalkline records current human-approved language guidance for a scoped writing system.
-People with the appropriate responsibility approve or change that guidance and review resulting drafts.
+Chalkline records language guidance approved by named participants for a stated scope.
+That provenance does not establish organizational, legal, accessibility, or localization authority.
+People with the relevant mandate approve or change guidance and review resulting drafts.
 Other systems own factual authority, production approval, publication, and verification in their own lifecycle.
 ```

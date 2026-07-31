@@ -1,6 +1,10 @@
 # Calibration pair 001 — payment failed email
 
-**Approved:** 2026-07-21 (fictional example)
+**ID:** `001-payment-failed-email`
+**Scope:** channel: email · audience: Meridian trip participants · purpose: payment-failure notice
+**Status:** active
+**Reference revision:** uncommitted fictional setup
+**Reusable-direction approval:** 2026-07-21 · Casey, fictional setup participant · scope above
 
 **Baseline method:** clean session with only the original and the request “Make this payment-failure email clearer and friendlier.”
 

@@ -63,7 +63,7 @@ body:
     id: reproduction
     attributes:
       label: Public-safe reproduction
-      description: Optional. Give the smallest synthetic or redacted steps another person could run. Do not include your real rules or source copy.
+      description: Give the smallest synthetic or redacted steps another person could run. If safe reproduction is impossible, say why and classify this as an observation requiring confidential maintainer follow-up—not evidence for an upstream behavior change. Do not include your real rules or source copy.
   - type: textarea
     id: check
     attributes:

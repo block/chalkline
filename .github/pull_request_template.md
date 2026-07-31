@@ -4,7 +4,7 @@
 
 ## Learning check
 
-<!-- What reproduction, calibration pair, or next comparable task would show that this change worked without creating a new problem? -->
+<!-- For behavior changes: link an executed held-out reproduction and unchanged control; name exact inputs, full revisions, harness/model/settings, predeclared failure criterion, outputs, and regressions. A plan for a future check is not verification. For documentation-only changes, explain why execution does not apply. Agent self-reports and checked boxes are not proof. -->
 
 ## Changes
 
@@ -15,5 +15,5 @@
 - [ ] I used only fictional, redacted, or explicitly publishable material.
 - [ ] I did not include secrets, personal or customer data, confidential material, or private links.
 - [ ] Examples preserve supplied facts and do not invent product state, causes, dates, deadlines, guarantees, names, amounts, eligibility, or actions.
-- [ ] I named and ran—or documented how to run—the reproduction, calibration pair, or next comparable task that checks this change.
+- [ ] I linked the executed held-out check and control, or recorded a reviewer-approved evidence exception/documentation-only rationale.
 - [ ] My commits include a DCO sign-off (`git commit -s`).
