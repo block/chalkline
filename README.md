@@ -80,8 +80,8 @@ This hard boundary follows an adversarial result: a tool-capable agent read a se
 - Not a style guide — it ships no opinions about how *you* should sound.
 - Not a tool for correcting how teammates speak.
 - Not a grammar checker or writing model.
-- Not a complete language governance system.
-- Not a compliance tool. It records your judgment; it doesn't supply it.
+- Not a complete language governance system. Company-scale use still needs representation, locale/accessibility ownership, confidential objections, appeals, risk-tiered review, discovery, and revocation outside Chalkline.
+- Not a compliance, authority, or performance-management tool. It records scoped participant decisions; it does not establish mandate, organizational representation, or verified adherence.
 
 ## Contributing
 

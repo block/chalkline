@@ -109,6 +109,19 @@ Chalkline records participant-approved language guidance and calibration directi
 
 Downstream tools can use Chalkline as a language-guidance source, but they remain responsible for their own authorization, factual inputs, lifecycle, review, audit, and publication boundaries.
 
+## Company-scale claim gate
+
+Chalkline's files and attestations do not by themselves make a language system organization-wide, representative, compliant, verified, or safe for performance management. Do not make those claims or roll guidance across teams until the adopting organization documents external controls for:
+
+- affected-group participation and locale/accessibility ownership;
+- valid variants, dissent, appeal, local exceptions, and withdrawal;
+- a confidential route for sensitive objections, with audience, retention, deletion, and anti-retaliation boundaries;
+- authority for `must`, exact wording, and cross-team decisions;
+- sustainable risk tiers or batched review so safety does not become approval theater;
+- consumer discovery, precedence, revocation, and recovery beyond Chalkline's local source record.
+
+Before a cross-team rule ships, ask **who is constrained?** An affected non-owner—not solely the proposed owner—should name the represented scope, at least one valid variant or exception to preserve, and where someone can challenge the rule without posting sensitive evidence publicly. If the organization cannot provide that participation or route, keep the system local and do not claim broader authority.
+
 ## Scope and boundaries
 
 A small team can run this loop in one repository. Separate teams, products, brands, or audiences can maintain separate repositories, but Chalkline does not yet define discovery, inheritance, freshness, or precedence across overlapping repositories.

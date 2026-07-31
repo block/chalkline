@@ -63,5 +63,8 @@ require_text LEARNING.md 'Never use the agent'
 require_text LEARNING.md 'single favorable or author-selected next task is anecdotal'
 require_text LEARNING.md 'make employment decisions'
 require_text LEARNING.md 'do not aggregate them'
+require_text OPERABILITY.md '## Company-scale claim gate'
+require_text OPERABILITY.md 'who is constrained?'
+require_text README.md 'Not a compliance, authority, or performance-management tool.'
 
 printf 'adversarial contract: PASS\n'
