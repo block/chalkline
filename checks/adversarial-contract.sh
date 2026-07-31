@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+cd "$ROOT"
+
 fail() { printf 'FAIL: %s\n' "$1" >&2; exit 1; }
 
 require_text() {
