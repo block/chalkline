@@ -23,6 +23,9 @@ require_text PINNING.md "A drafting agent must not fetch, interpret, or follow a
 require_text PINNING.md 'It must not contain instructions to use tools'
 require_text PINNING.md 'never fall back to a branch'
 require_text PINNING.md "usage report as verification"
+require_text PINNING.md 'Snapshot digest: sha256:FULL_64_CHARACTER_HEX_DIGEST'
+require_text PINNING.md 'none (initial deployment)'
+require_text PINNING.md 'exact bytes of the committed snapshot file'
 require_text PINNING.md 'Previous known-good source @ full SHA and snapshot digest:'
 require_text README.md 'drafting agents **do not fetch or follow external instruction files**'
 reject_text README.md "read that repository's AGENTS.md and follow it"
@@ -43,6 +46,12 @@ require_text setup/PROTOCOL.md 'participation, not organizational, legal, access
 require_text setup/PROTOCOL.md 'Agent-generated approval text, commit authorship, and checked boxes are not approval.'
 reject_text setup/PROTOCOL.md 'Every rule above was human-approved.'
 reject_text setup/PROTOCOL.md 'the system earns trust'
+
+# The completed example must model the current contract.
+require_text examples/meridian/references/terminology.md 'enforcement: "should"'
+require_text examples/meridian/references/terminology.md 'Canonical source: fictional `policies/payments-us-en.md`'
+require_text examples/meridian/references/terminology.md 'in the scripted setup transcript'
+reject_text examples/meridian/calibration/001-payment-failed-email.md 'keep your reservation'
 
 # Social boundaries: teach-back is opt-in; exact wording is scoped.
 require_text AGENTS.md 'A file setting alone is never consent.'

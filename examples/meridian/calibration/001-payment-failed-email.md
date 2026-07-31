@@ -18,7 +18,7 @@
 
 > Subject: Payment issue with your Lisbon trip
 >
-> We couldn't process your payment for the Lisbon trip. Please update your payment method soon to keep your reservation. We apologize for any inconvenience.
+> We couldn't process your payment for the Lisbon trip. Please update your payment information so you don't lose your spot. We apologize for any inconvenience.
 
 ## With the system
 

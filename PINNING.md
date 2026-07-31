@@ -22,8 +22,10 @@ Record the exact canonical source and full immutable commit hash in the consumin
 
 Canonical source: https://github.com/ORG/LANGUAGE-REPO.git
 Revision: FULL_40_CHARACTER_COMMIT_SHA
-Previous known-good revision: FULL_40_CHARACTER_COMMIT_SHA
+Previous known-good revision: none (initial deployment) | FULL_40_CHARACTER_COMMIT_SHA
 Projected snapshot: .language/REFERENCE_SNAPSHOT.md
+Snapshot digest: sha256:FULL_64_CHARACTER_HEX_DIGEST
+Previous known-good snapshot digest: none (initial deployment) | sha256:FULL_64_CHARACTER_HEX_DIGEST
 
 Verified by: CONSUMING_OWNER_OR_TRUSTED_INTEGRATION
 Verified at: YYYY-MM-DD
@@ -37,7 +39,7 @@ guidance.
 
 If the language source lives in the same repository, record its repository-relative path and commit instead of a URL. The drafting agent still reads a reviewed snapshot or the explicitly allowlisted local reference files—not another instruction graph.
 
-The verification fields are an attestation by the consuming owner/integration and repository review—not cryptographic proof to the model. The drafting agent checks that the required local record exists; it does not fetch upstream or attest to work it cannot verify.
+The snapshot digest is SHA-256 over the exact bytes of the committed snapshot file named by `Projected snapshot` (no path normalization, manifest expansion, or line-ending conversion). On initial deployment, both previous values are literally `none (initial deployment)`; after the first deployment, both must name the real previous known-good revision and digest. The verification fields are an attestation by the consuming owner/integration and repository review—not cryptographic proof to the model. The drafting agent checks that the required local record exists; it does not fetch upstream or attest to work it cannot verify.
 
 ## What may enter the snapshot
 
