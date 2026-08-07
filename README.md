@@ -2,7 +2,7 @@
 
 **Snap a line before your agents build.**
 
-Your team runs on language now: it's how you brief agents, how agents write to your customers, and what your product's words are supposed to mean. chalkline turns the part of that your team can actually agree on — voice, terminology, vocabulary, channel rules — into a small writing system agents consult instead of guess at. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language.
+Your team runs on language now: it's how you brief agents, how agents write to your customers, and what your product's words are supposed to mean. chalkline turns the part of that your team can actually agree on — voice, terminology, vocabulary, channel rules — into a small writing system agents consult instead of guess at. A chalk line is the first tool on a build site: snap it once, and every cut after lands straight. This is that, for your team's language. It aligns *how* your language binds — the same contract every agent consults — while leaving *what* you say entirely to you; see [Language as a force function](FORCE_FUNCTION.md).
 
 ## The problem
 
