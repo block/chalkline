@@ -58,17 +58,14 @@ Before pasting style guides, customer copy, or other source material, read [Safe
 
 ## Point other repos at your system
 
-Your writing system is most useful when the repositories your team actually works in declare it. Add a **language pin** to any consuming repository's `AGENTS.md`:
+Do not tell a drafting agent to fetch and follow another repository's instruction files. Instead, use the [language source trust boundary](PINNING.md):
 
-```text
-## Language
+1. Review the intended language source at an exact commit outside the drafting session.
+2. Copy only the approved language data needed by the consumer into a local snapshot.
+3. Review that snapshot by diff.
+4. Let drafting agents read only the reviewed local data.
 
-This team's writing system is https://github.com/ORG/YOUR-LANG-REPO @ COMMIT.
-Before writing anything on this team's behalf, read that repository's AGENTS.md and follow it.
-If you cannot read that revision, say so and treat it as a gap — do not guess our voice.
-```
-
-If your system lives in a directory of the same repository, point the pin at that path instead. Agents working in a pinned repo consult your references at a known revision and can cite it in their usage reports. Update the commit deliberately — bumping the pin is how an approved language change reaches consuming repos. If more than one language repo could apply to a task, agents should surface that rather than compose them silently — see [Operability](OPERABILITY.md).
+This keeps the language source traceable without granting an external repository general agent-instruction authority. Chalkline does not ship the projector or validator; each consuming repository owns its local update and recovery.
 
 ## Design principles
 
