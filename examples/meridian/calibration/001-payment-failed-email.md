@@ -1,6 +1,10 @@
 # Calibration pair 001 — payment failed email
 
-**Approved:** 2026-07-21 (fictional example)
+**ID:** `001-payment-failed-email`
+**Scope:** channel: email · audience: Meridian trip participants · purpose: payment-failure notice
+**Status:** active
+**Reference revision:** uncommitted fictional setup
+**Reusable-direction approval:** 2026-07-21 · Casey, fictional setup participant · scope above
 
 **Baseline method:** clean session with only the original and the request “Make this payment-failure email clearer and friendlier.”
 
@@ -14,7 +18,7 @@
 
 > Subject: Payment issue with your Lisbon trip
 >
-> We couldn't process your payment for the Lisbon trip. Please update your payment method soon to keep your reservation. We apologize for any inconvenience.
+> We couldn't process your payment for the Lisbon trip. Please update your payment information so you don't lose your spot. We apologize for any inconvenience.
 
 ## With the system
 
