@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chalkline: a writing system your team owns and your agents can consult. Local public-site prototype.">
+  <title>Chalkline — a writing system your team owns</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <a class="wordmark" href="#purpose" aria-label="Chalkline home"><span class="mark" aria-hidden="true">/</span> chalkline</a>
+  <nav aria-label="Main navigation"><a href="#setup">Start</a><a href="#use">Try the example</a><a href="https://github.com/block/chalkline">GitHub <span aria-hidden="true">↗</span></a></nav>
+</header>
+<div class="layout">
+  <aside class="rail"><p class="eyebrow">A team-owned writing system</p><nav aria-label="Page sections"><a href="#purpose"><span>01</span> Purpose</a><a href="#drift"><span>02</span> Drift</a><a href="#setup"><span>03</span> Setup</a><a href="#files"><span>04</span> Files</a><a href="#use"><span>05</span> Use</a><a href="#improve"><span>06</span> Improve</a></nav><p class="rail-note">Writing rules in Markdown, reviewed by your team.</p></aside>
+  <main id="main">
+    <section id="purpose" class="hero">
+      <p class="eyebrow">01 / Purpose</p>
+      <h1>A writing system your team owns.</h1>
+      <p class="lede">Chalkline helps your team write down its voice, terminology, and channel rules so agents can consult them before drafting. You review the rules and keep them in editable Markdown files.</p>
+      <div class="actions"><a class="primary-link" href="#setup">Set up your writing system <span aria-hidden="true">↓</span></a><a href="https://github.com/block/chalkline">Read the repository ↗</a></div>
+      <div class="project-note"><span class="eyebrow">Local site prototype</span><p>This local prototype has no live model or uploads. The receipt example shows <a href="https://github.com/block/chalkline/pull/18">proposed work in PR #18</a>, not a merged release.</p></div>
+    </section>
+    <section id="drift">
+      <p class="eyebrow">02 / Drift</p><h2>Keep writing guidance out of scattered prompts</h2>
+      <p>When writing guidance is copied into separate prompts for support replies, product messages, and release notes, those copies can drift apart. Chalkline keeps the guidance in one set of references and instructs agents to consult them before drafting, flag missing requirements, and ask about unresolved conflicts. Product facts, deadlines, and promises still need their own sources; writing rules cannot establish them.</p>
+    </section>
+    <section id="setup">
+      <p class="eyebrow">03 / Setup</p><h2>Set up your references</h2>
+      <p>Open your own copy of Chalkline in an agent that reads repository instructions and ask:</p>
+      <blockquote>“Set up my writing system.”</blockquote>
+      <ol class="steps"><li><h3>Answer a few questions.</h3><p>The agent asks about your team’s voice and terms, one question at a time. Share only material you have permission to use.</p></li><li><h3>Review the proposed rules.</h3><p>Review each proposed rule, including any extracted from your examples, before approving it for your team’s use.</p></li><li><h3>Compare the rewrites.</h3><p>Compare rewrites of a sample with and without the references. Decide whether you approve the draft and, separately, whether it should guide similar work.</p></li></ol>
+      <p class="small">Start privately unless all inputs and outputs are safe to publish. Review changes before choosing whether to commit.</p>
+    </section>
+    <section id="files">
+      <p class="eyebrow">04 / Files</p><h2>What the files contain</h2>
+      <p>Setup produces two to four reference files, depending on the guidance your team needs.</p>
+      <dl class="file-list"><div><dt>voice.md</dt><dd>How you sound, with examples.</dd></div><div><dt>terminology.md</dt><dd>Preferred words and non-negotiable terms.</dd></div><div><dt>vocabulary.md <span>optional</span></dt><dd>Maps everyday requests to your team’s terms so agents can understand them without correcting how people speak.</dd></div><div><dt>channels.md <span>if needed</span></dt><dd>Guidance specific to a channel.</dd></div></dl>
+      <p><code>AGENTS.md</code> tells agents how to consult the system. Approved before-and-after examples show how the guidance applies to a particular audience, channel, and task.</p>
+    </section>
+    <section id="use" class="demo-section">
+      <p class="eyebrow">05 / Use</p><h2>Inspect a draft and its sources</h2>
+      <p>Choose a fictional Harbor task to see its facts, writing rules, draft, and receipt. The examples are prewritten, not generated or verified by AI. Removing a required source shows how a blocked task should be reported; nothing is sent to a server.</p>
+      <div class="demo">
+        <div class="demo-top"><span class="eyebrow">Harbor / fictional product UI</span><span class="demo-label">Scripted illustration</span></div>
+        <div class="controls"><p class="control-label" id="task-label">Choose a task</p><div class="task-buttons" role="group" aria-labelledby="task-label"><button type="button" data-task="reservation" aria-pressed="true">Reservation request</button><button type="button" data-task="change" aria-pressed="false">Failed change request</button></div><button type="button" id="missing-toggle" aria-pressed="false">Remove required source: off</button></div>
+        <noscript><p class="noscript">Enable JavaScript to use this local scripted illustration. No draft or assessment is available without it.</p></noscript>
+        <div id="demo-content" hidden>
+          <div class="input-grid"><div><h3>Supplied facts <span id="fact-id"></span></h3><ul id="facts"></ul></div><div><h3>Applicable rules <span>R1–R2</span></h3><ul><li id="rule-one"></li><li id="rule-two"></li></ul><p id="source-status" class="small"></p></div></div>
+          <div class="candidate"><div class="candidate-heading"><h3>Candidate draft</h3><span id="draft-status"></span></div><p id="draft"></p><p id="blocked-message" hidden>The required terminology source is missing. Restore it before drafting.</p><p id="draft-note" class="small">Example copy; not approved for use.</p></div>
+          <section class="receipt" aria-labelledby="receipt-title"><div class="receipt-heading"><h3 id="receipt-title">Usage receipt</h3><span class="eyebrow">Self-report / separate from copy</span></div><p class="small">This example receipt shows what an agent would report. It does not record an actual review or approval.</p><dl id="receipt-fields"></dl><div class="scores" id="scores"></div><p class="overall" id="overall"></p><p class="small">0 blocked · 1 limited · 2 supported · 3 corroborated. Use the lowest applicable score, never an average. The score describes the evidence available for this task; it does not establish correctness, compliance, or permission to publish.</p></section>
+        </div>
+        <p class="live-status" id="demo-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
+    </section>
+    <section id="improve">
+      <p class="eyebrow">06 / Improve</p><h2>Revise guidance through review</h2>
+      <p>If a draft reveals missing or unclear guidance, propose a reference change for the responsible person to review. An accepted edit does not automatically become a rule for everyone. Test changes on new, comparable work without showing the agent the expected rewrite; the sample used during setup cannot establish whether the guidance helps on other tasks.</p>
+      <div class="closing"><h3>Get started</h3><p>Use the setup protocol and fictional examples in the repository to build your own references, with reviewers chosen by your team.</p><a class="primary-link" href="https://github.com/block/chalkline">Explore Chalkline on GitHub <span aria-hidden="true">↗</span></a></div>
+    </section>
+    <footer><a class="wordmark" href="#purpose">chalkline</a><p>Independent local prototype · No remote assets or telemetry</p><a href="https://github.com/block/chalkline/pull/18">PR #18: proposed receipt work ↗</a></footer>
+  </main>
+</div>
+</body>
+</html>
