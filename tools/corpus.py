@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import stat
@@ -13,6 +14,13 @@ DOMAINS = ("shared", "product", "marketing", "support")
 ENFORCEMENTS = ("must", "should", "may")
 REQUIRED = {"title", "brand", "domain", "enforcement"}
 ALLOWED = REQUIRED | {"teaching"}
+
+# Fixed ingestion limits, not CLI options. Bytes refer to original file contents.
+MAX_REFERENCE_FILES = 1000
+MAX_REFERENCE_BYTES = 1024 * 1024
+MAX_TOTAL_REFERENCE_BYTES = 16 * 1024 * 1024
+MAX_DIRECTORY_DEPTH = 16
+MAX_FILESYSTEM_ENTRIES = 10000
 
 
 class CorpusError(ValueError):
@@ -108,24 +116,52 @@ def load_corpus(root):
     if not references.exists() and not references.is_symlink():
         raise CorpusError("references/ does not exist under the selected root")
     records = []
+    entry_count = 0
+    reference_count = 0
+    total_bytes = 0
 
-    def walk(directory):
+    def walk(directory, depth=0):
+        nonlocal entry_count, reference_count, total_bytes
+        if depth > MAX_DIRECTORY_DEPTH:
+            raise CorpusError("directory depth limit exceeded (%d): %s" %
+                              (MAX_DIRECTORY_DEPTH, directory.relative_to(root).as_posix()))
         mode = directory.lstat().st_mode
         if stat.S_ISLNK(mode):
             raise CorpusError("symlink not allowed: " + directory.relative_to(root).as_posix())
         if not stat.S_ISDIR(mode):
             raise CorpusError("expected directory: " + directory.relative_to(root).as_posix())
-        for child in sorted(directory.iterdir(), key=lambda item: item.name):
+        # Bound enumeration before sorting; ignored files also consume the budget.
+        children = []
+        with os.scandir(directory) as entries:
+            for entry in entries:
+                entry_count += 1
+                if entry_count > MAX_FILESYSTEM_ENTRIES:
+                    raise CorpusError("filesystem entry limit exceeded (%d) under references/" %
+                                      MAX_FILESYSTEM_ENTRIES)
+                children.append(directory / entry.name)
+        for child in sorted(children, key=lambda item: item.name):
             path = child.relative_to(root).as_posix()
             mode = child.lstat().st_mode
             if stat.S_ISLNK(mode):
                 raise CorpusError("symlink not allowed: " + path)
             if stat.S_ISDIR(mode):
-                walk(child)
+                walk(child, depth + 1)
             elif not stat.S_ISREG(mode):
                 raise CorpusError("special file not allowed: " + path)
             elif child.suffix.lower() == ".md" and child.name.lower() != "readme.md":
-                raw = child.read_bytes()
+                reference_count += 1
+                if reference_count > MAX_REFERENCE_FILES:
+                    raise CorpusError("reference file count limit exceeded (%d): %s" %
+                                      (MAX_REFERENCE_FILES, path))
+                with child.open("rb") as stream:
+                    raw = stream.read(MAX_REFERENCE_BYTES + 1)
+                if len(raw) > MAX_REFERENCE_BYTES:
+                    raise CorpusError("reference byte limit exceeded (%d): %s" %
+                                      (MAX_REFERENCE_BYTES, path))
+                total_bytes += len(raw)
+                if total_bytes > MAX_TOTAL_REFERENCE_BYTES:
+                    raise CorpusError("total reference byte limit exceeded (%d): %s" %
+                                      (MAX_TOTAL_REFERENCE_BYTES, path))
                 try:
                     metadata, body, first_line = parse(raw, path)
                 except CorpusError as exc:
@@ -180,6 +216,14 @@ HELP = """Scope and format:
   YAML aliases/tags, BOM, and other YAML features are unsupported and rejected.
 
 Output and limits:
+  Fixed ingestion caps: 1000 reference Markdown files; 1 MiB (1048576 bytes)
+  per reference; 16 MiB (16777216 bytes) total reference contents; 16 directory
+  levels below references/ (which is level 0); 10000 filesystem entries below
+  references/, including directories, README placeholders, and non-Markdown files.
+  Ignored files do not count toward reference file/byte caps. Reads are bounded
+  to the per-file cap plus one byte. Exceeding any cap fails before JSON output
+  or output-file creation; no partial results. Limits are not a sandbox and do
+  not make concurrent corpus modification safe.
   JSON schema_version 1; paths relative to root, sorted by path, no timestamps
   or absolute paths. SHA-256 covers original file bytes, including frontmatter.
   Index is a manifest, not a database; search always rereads and validates files.

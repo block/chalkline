@@ -20,6 +20,20 @@ python3 tools/corpus.py --help
 
 `--root` selects a directory containing `references/`. To check your own system, use `--root .`. Flat and nested Markdown files are included; README placeholders, calibration pairs, and files outside `references/` are not. All symlinks and special files inside references are rejected, as are symlinks in the selected root path. Use a real directory path, not a symlink. Do not modify the corpus concurrently while checking it; this is not a filesystem sandbox.
 
+## Fixed ingestion limits
+
+Every command rejects a corpus exceeding any of these limits:
+
+- 1,000 reference Markdown files (README placeholders are excluded).
+- 1 MiB (1,048,576 bytes) per reference file.
+- 16 MiB (16,777,216 bytes) of reference file contents in total.
+- 16 directory levels below `references/`, which is level 0.
+- 10,000 filesystem entries below `references/`, counting directories, README placeholders, and non-Markdown files as well as references. The `references/` directory itself is not counted.
+
+These are fixed limits, not CLI options. Ignored files count toward the traversal limit but not the reference file or byte limits. Each reference read is bounded to the per-file limit plus one byte; byte checks, parsing, and SHA-256 use the bytes actually read, not a file-size estimate. Exactly reaching a limit is allowed. Exceeding any limit fails visibly with exit status `1`, before JSON output or output-file creation; no partial results are returned.
+
+Limits bound ingestion, not all process resources. They do not make this tool a filesystem sandbox or safe against concurrent changes. Do not run it against a corpus being modified concurrently.
+
 ## What the output means
 
 - **Check:** structural validity and file count. A valid empty template reports `count: 0`; it contains no writing guidance.
@@ -63,7 +77,7 @@ Drafting and review now include a [traceability and confidence receipt](../docs/
 python3 tools/receipt.py path/to/receipt.json
 ```
 
-It reads one local JSON file and emits the validated receipt with its computed `overall` to stdout. It never writes back, follows source/evidence locators, verifies hashes, or calls a model. Exit 0 means the receipt is structurally valid—even when `overall` is 0 (blocked). Exit 1 means invalid input; 2 means CLI misuse. Do not use process success as artifact approval.
+It reads one local JSON file and emits the validated receipt with its computed `overall` to stdout. On success, a notice on stderr labels the result as structure/arithmetic validation with unverified evidence and approval. The JSON shape is unchanged; integrations must preserve that distinction even if they discard stderr. It never writes back, follows source/evidence locators, verifies hashes, or calls a model. Exit 0 means the receipt is structurally valid—even when `overall` is 0 (blocked). Exit 1 means invalid input; 2 means CLI misuse. Do not use process success as artifact approval.
 
 The author supplies evidence-backed dimension assessments. The checker computes the lowest applicable score, with any declared blocker forcing 0. It rejects invalid scores, duplicate keys and IDs within each record group, dangling links, missing reasons, and inconsistent supplied totals. It cannot detect invented evidence, omitted blockers, unjustified N/A, or misleading reasoning. Evidence adequacy still needs review.
 
