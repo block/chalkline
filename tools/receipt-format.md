@@ -2,6 +2,8 @@
 
 Plain-text receipts remain the default user interface. This optional JSON representation supports local integrations with `python3 tools/receipt.py FILE.json`. The [traceability contract](../docs/traceability.md) governs meaning; the checker validates structure and arithmetic only.
 
+On successful validation, JSON remains on stdout unchanged in shape. A notice on stderr states that only structure and arithmetic were validated; evidence and approval remain unverified. Integrations must preserve this distinction even if they discard stderr. Exit 0 also covers blocked receipts.
+
 All fields below are required except `sha256` and `overall`. Unknown fields are rejected. Strings must be nonempty; lists may be empty where there is nothing to report. An empty list is an explicit claim of absence, not a way to hide unknowns.
 
 | Field | Shape and meaning |

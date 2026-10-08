@@ -2,6 +2,7 @@
 
 import hashlib
 import importlib.util
+import io
 import json
 import os
 from pathlib import Path
@@ -9,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 TOOL = Path(__file__).resolve().parents[1] / "tools" / "corpus.py"
 # Avoid importlib's bytecode cache: the tool and tests need no disk caches.
@@ -68,6 +70,98 @@ class CorpusTests(unittest.TestCase):
         self.assertNotIn(str(self.root), before.stdout)
         first.write_bytes(first.read_bytes() + b"\n")
         self.assertNotEqual(before.stdout, self.cli("index").stdout)
+
+    def assert_limit_failure(self, constant, limit, message):
+        with mock.patch.object(corpus, constant, limit):
+            with self.assertRaisesRegex(corpus.CorpusError, message):
+                corpus.load_corpus(self.root)
+            for command in ("check", "index", "search"):
+                for to_file in (False, True):
+                    with self.subTest(command=command, to_file=to_file):
+                        output = self.root / "result.json"
+                        args = [command, "--root", str(self.root)]
+                        if command == "search":
+                            args += ["payment", "--brand", "other"]
+                        if to_file:
+                            args += ["--output", str(output)]
+                        with mock.patch("sys.stdout", new_callable=io.StringIO) as stdout, \
+                                mock.patch("sys.stderr", new_callable=io.StringIO) as stderr:
+                            self.assertEqual(corpus.main(args), 1)
+                            self.assertEqual(stdout.getvalue(), "")
+                            self.assertIn(message, stderr.getvalue())
+                            self.assertNotIn("Traceback", stderr.getvalue())
+                        self.assertFalse(output.exists())
+
+    def test_ingestion_limits_exact_boundary_unchanged_control(self):
+        self.put("a.md")
+        self.put("nested/b.md")
+        self.put("README.md", "ignored")
+        self.put("notes.txt", "ignored")
+        expected = corpus.load_corpus(self.root)
+        size = len(BASE.encode("utf-8"))
+        with mock.patch.multiple(corpus, MAX_REFERENCE_FILES=2,
+                                 MAX_REFERENCE_BYTES=size,
+                                 MAX_TOTAL_REFERENCE_BYTES=2 * size,
+                                 MAX_DIRECTORY_DEPTH=1, MAX_FILESYSTEM_ENTRIES=5):
+            self.assertEqual(corpus.load_corpus(self.root), expected)
+            with mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                self.assertEqual(corpus.main(["index", "--root", str(self.root)]), 0)
+                self.assertEqual(json.loads(stdout.getvalue())["records"],
+                                 [corpus.public_record(record) for record in expected])
+
+    def test_reference_file_count_limit(self):
+        self.put("a.md")
+        self.put("b.MD")
+        self.assert_limit_failure("MAX_REFERENCE_FILES", 1, "reference file count limit exceeded")
+
+    def test_reference_byte_limit(self):
+        self.put(text=BASE.replace("Sample", "Café"))
+        size = len((self.root / "references" / "voice.md").read_bytes())
+        self.assert_limit_failure("MAX_REFERENCE_BYTES", size - 1, "reference byte limit exceeded")
+
+    def test_total_reference_byte_limit(self):
+        self.put("a.md")
+        self.put("b.md")
+        self.assert_limit_failure("MAX_TOTAL_REFERENCE_BYTES", 2 * len(BASE.encode()) - 1,
+                                  "total reference byte limit exceeded")
+
+    def test_directory_depth_limit_including_ignored_contents(self):
+        self.put("a.md")
+        self.put("one/two/notes.txt", "ignored")
+        self.assert_limit_failure("MAX_DIRECTORY_DEPTH", 1, "directory depth limit exceeded")
+
+    def test_filesystem_entry_limit_including_ignored_contents(self):
+        self.put("a.md")
+        self.put("nested/README.md", "ignored")
+        self.put("notes.txt", "ignored")
+        self.assert_limit_failure("MAX_FILESYSTEM_ENTRIES", 3, "filesystem entry limit exceeded")
+
+    def test_reference_read_is_bounded_and_checks_actual_bytes(self):
+        self.put()  # The on-disk size is smaller than the bytes supplied by the stream.
+        size = len(BASE.encode())
+        stream = mock.Mock(wraps=io.BytesIO(BASE.encode() + b"extra"))
+        context = mock.MagicMock()
+        context.__enter__.return_value = stream
+        with mock.patch.object(corpus, "MAX_REFERENCE_BYTES", size), \
+                mock.patch.object(Path, "open", return_value=context), \
+                self.assertRaisesRegex(corpus.CorpusError, "reference byte limit exceeded"):
+            corpus.load_corpus(self.root)
+        stream.read.assert_called_once_with(size + 1)
+
+    def test_hash_and_parse_use_same_actual_bytes(self):
+        self.put()
+        raw = BASE.replace("Sample", "Café").encode("utf-8")
+        stream = mock.Mock(wraps=io.BytesIO(raw))
+        context = mock.MagicMock()
+        context.__enter__.return_value = stream
+        with mock.patch.object(corpus, "MAX_REFERENCE_BYTES", len(raw)), \
+                mock.patch.object(corpus, "MAX_TOTAL_REFERENCE_BYTES", len(raw)), \
+                mock.patch.object(Path, "open", return_value=context):
+            record = corpus.load_corpus(self.root)[0]
+        stream.read.assert_called_once_with(len(raw) + 1)
+        self.assertEqual(record["metadata"]["title"], "Café")
+        self.assertEqual(record["bytes"], len(raw))
+        self.assertEqual(record["sha256"], hashlib.sha256(raw).hexdigest())
 
     def test_search_and_exact_filters(self):
         self.put("a.md")

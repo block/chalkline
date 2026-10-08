@@ -6,6 +6,10 @@ Chalkline helps a team turn its approved voice, terminology, vocabulary, and cha
 
 This open-source project shares reusable methods for maintaining language guidance, not a company's private style guide. It ships fictional examples, a setup protocol, and optional local tools. Your team supplies its own rules and decides who can approve them.
 
+## Status
+
+Experimental protocol and template. Local structural checks and synthetic regressions run in CI; they do not verify writing quality or model adherence. Cross-harness setup parity, real-team setup burden, and ingest limits still need field validation. Cross-repository snapshot projection is a manual review contract, not bundled enforcement. See [sharing readiness and the next experiments](docs/sharing-readiness.md).
+
 ## The problem
 
 Your agents write now — support replies, product copy, lifecycle email, release notes. What they know about *your* voice is whatever happened to be in the prompt — and every new prompt, agent file, and skill restates that voice from memory, drifting a little each time. Style guides live in PDFs and wikis that no tool consults. Teams that skip setup blame the tools for output that was never given the chance to be right.
@@ -48,7 +52,7 @@ Two to four small files plus an optional calibration pair, not a hundred. You co
 
 Target time: under 30 minutes. We're testing that target through real setup experiences.
 
-The upstream `GOVERNANCE.md`, `CODEOWNERS`, `CONTRIBUTING.md`, and `.github/` settings govern contributions to Chalkline itself. When adopting the template, review or replace those settings for your own repository; preserve applicable license and copyright notices. Using Chalkline does not place your language decisions under Block governance or appoint Chalkline maintainers as your reviewers. Agents should propose these changes, never assign owners or remove notices silently.
+The upstream `GOVERNANCE.md`, `CODEOWNERS`, `CONTRIBUTING.md`, and `.github/` settings govern contributions to Chalkline itself. When adopting the template, use the [adoption checklist](docs/adoption-checklist.md) to review or replace those settings for your own repository; preserve applicable license and copyright notices. Using Chalkline does not place your language decisions under Block governance or appoint Chalkline maintainers as your reviewers. Agents should propose these changes, never assign owners or remove notices silently.
 
 Before pasting style guides, customer copy, or other source material, read [Safety and privacy](SAFETY.md). Git history can preserve content after you delete it.
 

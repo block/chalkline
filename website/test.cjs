@@ -43,3 +43,7 @@ for (const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
   assert.ok(fs.existsSync(`${__dirname}/${match[1]}`), `Missing local asset ${match[1]}`);
 }
 console.log('PASS: both tasks, blocked/restored states, approval separation, local assets, and natural wrapping.');
+
+assert.doesNotMatch(html, /proposed work in PR #18|not a merged release|PR #18: proposed receipt work/);
+assert.match(html, /docs\/traceability\.md/);
+assert.match(html, /docs\/sharing-readiness\.md/);

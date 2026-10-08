@@ -207,11 +207,30 @@ class ReceiptTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0 if valid else 1, result.stderr)
                 if valid:
                     self.assertEqual(json.loads(result.stdout)["overall"], 1)
-                    self.assertEqual(result.stderr, "")
+                    self.assertIn("evidence and approval unverified", result.stderr)
                 else:
                     self.assertEqual(result.stdout, "")
                     self.assertIn("require evidence", result.stderr)
                 self.assertEqual({p.name: p.read_bytes() for p in root.iterdir()}, before)
+
+    def test_unverified_high_score_and_approval_are_not_attestation(self):
+        self.value["reviewer_approval"] = "approved; fictional unsupported claim"
+        self.value["evidence"][0]["locator"] = "nonexistent:fictional-evidence"
+        for dimension in self.value["dimensions"].values():
+            dimension.update(score=3, evidence_ids=["e1"])
+        self.assertEqual(receipt.validate(self.value)["overall"], 3)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "receipt.json"
+            for blocked in (False, True):
+                self.value["blockers"] = ["Required source unavailable."] if blocked else []
+                path.write_text(json.dumps(self.value), encoding="utf-8")
+                result = subprocess.run([sys.executable, "-B", str(TOOL), str(path)],
+                                        capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0)
+                self.assertEqual(json.loads(result.stdout)["overall"], 0 if blocked else 3)
+                self.assertIn("structure and arithmetic valid", result.stderr)
+                self.assertIn("evidence and approval unverified", result.stderr)
+                self.assertIn("exit 0 is not artifact approval", result.stderr)
 
     def test_cli_invalid_json_encoding_and_missing_path(self):
         with tempfile.TemporaryDirectory() as directory:

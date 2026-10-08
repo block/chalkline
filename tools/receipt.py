@@ -148,6 +148,8 @@ def main(argv=None):
     except (OSError, ValueError, RecursionError) as exc:
         print("receipt: " + str(exc), file=sys.stderr)
         return 1
+    print("receipt: structure and arithmetic valid; evidence and approval unverified; "
+          "exit 0 is not artifact approval", file=sys.stderr)
     print(json.dumps(result, indent=2, sort_keys=True, ensure_ascii=True, allow_nan=False))
     return 0
 
