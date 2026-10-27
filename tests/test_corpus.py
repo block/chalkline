@@ -20,6 +20,7 @@ corpus = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(corpus)
 BASE = ('---\ntitle: "Sample"\nbrand: "fictional"\ndomain: "shared"\n'
         'enforcement: "should"\n---\n\n# Sample\nA payment failed.\n')
+REVISION = "a1" * 20
 
 
 class CorpusTests(unittest.TestCase):
@@ -71,17 +72,103 @@ class CorpusTests(unittest.TestCase):
         first.write_bytes(first.read_bytes() + b"\n")
         self.assertNotEqual(before.stdout, self.cli("index").stdout)
 
+    def test_export_preserves_complete_original_bytes_and_leaves_index_unchanged(self):
+        text = BASE.replace('title: "Sample"', '# Source comment\ntitle: "Café"')
+        text += ('\nNon-negotiable (**must**).\n\n## Exact wording\n'
+                 '> Funds arrive in 1–2 days.  \n\n'
+                 'Scope: fictional US-English email; owner review required.\n\t\n')
+        raw = text.replace("\n", "\r\n").encode("utf-8")
+        path = self.put()
+        path.write_bytes(raw)
+        before = self.cli("index").stdout
+        search_before = self.cli("search", "funds").stdout
+        result = self.cli("export", "--reported-revision", REVISION.upper())
+        self.assertEqual(result.returncode, 0, result.stderr)
+        exported = json.loads(result.stdout)
+        self.assertEqual(exported["kind"], "chalkline-reference-export")
+        self.assertEqual(exported["source"], {
+            "reported_revision": REVISION, "verification": "unverified"})
+        record = exported["records"][0]
+        self.assertEqual(record["text"].encode("utf-8"), raw)
+        self.assertEqual(record["sha256"], hashlib.sha256(raw).hexdigest())
+        self.assertEqual(record["bytes"], len(raw))
+        self.assertEqual(record["metadata"]["enforcement"], "should")
+        self.assertIn("(**must**)", record["text"])
+        self.assertNotIn(str(self.root), result.stdout)
+        self.assertEqual(result.stdout,
+                         self.cli("export", "--reported-revision", REVISION).stdout)
+        self.assertEqual(before, self.cli("index").stdout)
+        self.assertEqual(search_before, self.cli("search", "funds").stdout)
+        self.assertEqual(json.loads(before)["records"], [
+            {key: value for key, value in record.items() if key != "text"}])
+
+    def test_export_scope_excludes_calibration_and_preserves_vocabulary_as_data(self):
+        self.put("z/voice.md")
+        self.put("vocabulary.md", BASE.replace('"should"', '"may"'))
+        self.put("README.md", "placeholder")
+        (self.root / "calibration").mkdir()
+        (self.root / "calibration" / "001-held-out.md").write_text("REVIEWER ONLY")
+        (self.root / "AGENTS.md").write_text("OPERATIONAL INSTRUCTIONS")
+        result = self.cli("export", "--reported-revision", "b" * 64)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        exported = json.loads(result.stdout)
+        self.assertEqual(exported["source"]["reported_revision"], "b" * 64)
+        self.assertEqual([r["path"] for r in exported["records"]], [
+            "references/vocabulary.md", "references/z/voice.md"])
+        self.assertNotIn("REVIEWER ONLY", result.stdout)
+        self.assertNotIn("OPERATIONAL INSTRUCTIONS", result.stdout)
+
+    def test_export_empty_template_is_not_coverage(self):
+        result = self.cli("export", "--reported-revision", REVISION)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout)["records"], [])
+
+    def test_export_requires_full_reported_revision_before_creating_output(self):
+        self.put()
+        output = self.root / "candidate.json"
+        for revision in (None, "main", "a" * 39, "a" * 41, "g" * 40, "a" * 63):
+            with self.subTest(revision=revision):
+                args = ["export", "--output", str(output)]
+                if revision is not None:
+                    args += ["--reported-revision", revision]
+                result = self.cli(*args)
+                self.assertEqual(result.returncode, 2, result.stderr)
+                self.assertEqual(result.stdout, "")
+                self.assertFalse(output.exists())
+
+    def test_export_rejects_bad_corpus_without_partial_output_or_overwrite(self):
+        self.put("a.md")
+        self.put("z.md", "invalid frontmatter")
+        output = self.root / "candidate.json"
+        result = self.cli("export", "--reported-revision", REVISION,
+                          "--output", str(output))
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertEqual(result.stdout, "")
+        self.assertFalse(output.exists())
+        self.put("z.md")
+        result = self.cli("export", "--reported-revision", REVISION,
+                          "--output", str(output))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        first = output.read_bytes()
+        self.put("a.md", BASE + "Changed.\n")
+        result = self.cli("export", "--reported-revision", REVISION,
+                          "--output", str(output))
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertEqual(output.read_bytes(), first)
+
     def assert_limit_failure(self, constant, limit, message):
         with mock.patch.object(corpus, constant, limit):
             with self.assertRaisesRegex(corpus.CorpusError, message):
                 corpus.load_corpus(self.root)
-            for command in ("check", "index", "search"):
+            for command in ("check", "index", "search", "export"):
                 for to_file in (False, True):
                     with self.subTest(command=command, to_file=to_file):
                         output = self.root / "result.json"
                         args = [command, "--root", str(self.root)]
                         if command == "search":
                             args += ["payment", "--brand", "other"]
+                        if command == "export":
+                            args += ["--reported-revision", REVISION]
                         if to_file:
                             args += ["--output", str(output)]
                         with mock.patch("sys.stdout", new_callable=io.StringIO) as stdout, \

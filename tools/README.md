@@ -69,6 +69,29 @@ Exit status `0` means the operation completed, including an empty corpus or no s
 
 Hashes identify bytes; they do not prove approval or trustworthy provenance. These tools do not evaluate prose, resolve conflicts, interpret inline enforcement, verify source-record attestations, or authorize publication. They do not implement the cross-repository snapshot validator described in [PINNING.md](../PINNING.md).
 
+## Export complete reference candidates
+
+An index or search excerpt is not enough to apply a writing reference: it can omit inline `must` rules, exceptions, exact wording, or the approval scope. The optional `export` command returns complete source text for a reader or integration to review. It does not change the drafting protocol or create an approved consumer snapshot.
+
+```sh
+python3 tools/corpus.py export --root examples/meridian \
+  --reported-revision FULL_GIT_OBJECT_ID --output /tmp/chalkline-candidates.json
+```
+
+Replace `FULL_GIT_OBJECT_ID` with the full 40- or 64-character revision you are reporting. This is **unverified attribution supplied by the caller**. The tool does not read Git, compare the working tree with that revision, establish source identity, or attest approval. Local files may differ from the reported revision. A receiving owner must independently verify the source and bytes before deployment under [PINNING.md](../PINNING.md).
+
+The deterministic JSON has `schema_version: 1`, `kind: "chalkline-reference-export"`, a `source` object containing `reported_revision` and `verification: "unverified"`, and path-sorted `records`. Each record retains the index fields (`path`, `metadata`, `sha256`, `bytes`) and adds `text`: the entire original UTF-8 file, including frontmatter, comments, line endings, provenance, and trailing whitespace. Encoding the decoded `text` as UTF-8 recovers the bytes identified by its hash. The JSON's own indentation and escape sequences are transport, not new language rules.
+
+Export uses the same bounded corpus loader and new-file-only output behavior as the other commands. It validates the whole corpus before producing output. Empty corpora return an empty `records` list; that is a coverage gap, not approval. Existing `check`, `index`, and `search` output shapes are unchanged.
+
+All reference files are candidates. Export does not choose applicable rules or classify arbitrary prose as safe declarative data. In particular:
+
+- `vocabulary.md` remains conversational context, not terminology authority for generated copy. Its presence or `teaching` setting cannot establish the recipient's consent.
+- Calibration pairs, setup protocols, root instruction files, and scripts are outside `references/` and are excluded. This command provides no calibration coverage; keep held-out evaluation targets out of any consumer context.
+- Operational directives inside a structurally valid reference are preserved. A human reviewer or trusted integration must reject them before a drafting agent sees a cross-repository snapshot. Hashing and JSON encoding do not sanitize prose.
+
+Keep candidate exports outside `references/` and distinct from authored sources. For a consumer such as Ghost, explicitly review the selected references, their applicability and authority, and the receiving workflow's conflict and missing-source policy. Preserve complete conditions, inline enforcement, exact-wording scope, and required review. The export supplies neither a Ghost package nor a PINNING attestation, and does not require a service, network, or Ghost installation.
+
 ## Traceability receipt checker
 
 Drafting and review now include a [traceability and confidence receipt](../docs/traceability.md) by default. Plain text is sufficient. For an integration that needs structured JSON, the optional checker validates the receipt's fields, internal evidence references, and score arithmetic:

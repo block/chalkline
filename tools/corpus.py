@@ -105,7 +105,7 @@ def parse(raw, path):
     return metadata, lines[end + 1:], end + 2
 
 
-def load_corpus(root):
+def load_corpus(root, include_text=False):
     root = Path(root).absolute()
     # Refuse symlinks in the supplied root, including its parent components.
     for component in (root,) + tuple(root.parents):
@@ -166,15 +166,24 @@ def load_corpus(root):
                     metadata, body, first_line = parse(raw, path)
                 except CorpusError as exc:
                     raise CorpusError(path + ": " + str(exc)) from exc
-                records.append({"path": path, "metadata": metadata,
-                                "sha256": hashlib.sha256(raw).hexdigest(),
-                                "bytes": len(raw), "body": body, "first_line": first_line})
+                record = {"path": path, "metadata": metadata,
+                          "sha256": hashlib.sha256(raw).hexdigest(),
+                          "bytes": len(raw), "body": body, "first_line": first_line}
+                if include_text:
+                    record["text"] = raw.decode("utf-8")
+                records.append(record)
     walk(references)
     return sorted(records, key=lambda record: record["path"])
 
 
 def public_record(record):
     return {key: record[key] for key in ("path", "metadata", "sha256", "bytes")}
+
+
+def reported_revision(value):
+    if not re.fullmatch(r"[0-9a-fA-F]{40}|[0-9a-fA-F]{64}", value):
+        raise argparse.ArgumentTypeError("expected a full 40- or 64-character Git object ID")
+    return value.lower()
 
 
 def search(records, query, filters):
@@ -232,6 +241,12 @@ Output and limits:
   matching, stemming, ranking, implicit shared-domain fallback, or rule evaluation.
   Matches list body lines containing any term; title-only matches have no lines.
   Empty query lists all records satisfying filters. Empty corpus is valid.
+  Export adds each reference's complete original UTF-8 text, including
+  frontmatter and line endings. UTF-8 encoding of text recovers the hashed bytes.
+  --reported-revision is a required caller-reported full Git object ID (40 or
+  64 hex characters); it is NOT verified against Git or the local files.
+  Export is unreviewed source data, not an approved snapshot or trust validation.
+  It includes vocabulary (conversation only); calibration remains excluded.
   No network, model, content execution, link following, or default disk writes.
   --output explicitly creates a NEW file (never overwrites; parents must exist).
   Check validates structure only, not writing quality or authority of the rules.
@@ -242,6 +257,7 @@ Examples:
   python3 tools/corpus.py index --root examples/meridian
   python3 tools/corpus.py search payment --root examples/meridian --domain shared
   python3 tools/corpus.py index --root . --output /tmp/chalkline-index.json
+  python3 tools/corpus.py export --root . --reported-revision FULL_GIT_OBJECT_ID
 """
 
 
@@ -249,11 +265,14 @@ def parser():
     cli = argparse.ArgumentParser(description=__doc__, epilog=HELP,
                                   formatter_class=argparse.RawDescriptionHelpFormatter)
     commands = cli.add_subparsers(dest="command", required=True)
-    for name in ("check", "index", "search"):
+    for name in ("check", "index", "search", "export"):
         sub = commands.add_parser(name, epilog=HELP,
                                   formatter_class=argparse.RawDescriptionHelpFormatter)
         sub.add_argument("--root", default=".", help="directory containing references/ (default: .)")
         sub.add_argument("--output", metavar="NEW_FILE", help="create JSON file instead of stdout; never overwrite")
+        if name == "export":
+            sub.add_argument("--reported-revision", required=True, type=reported_revision,
+                             metavar="FULL_GIT_OBJECT_ID", help="caller-reported revision; not verified")
         if name == "search":
             sub.add_argument("query", nargs="?", default="", help="literal terms; AND matching; empty lists all")
             sub.add_argument("--brand", help="exact brand slug filter")
@@ -265,12 +284,18 @@ def parser():
 def main(argv=None):
     args = parser().parse_args(argv)
     try:
-        records = load_corpus(args.root)
+        records = load_corpus(args.root, include_text=args.command == "export")
         result = {"schema_version": 1}
         if args.command == "check":
             result.update({"valid": True, "count": len(records)})
         elif args.command == "index":
             result["records"] = [public_record(record) for record in records]
+        elif args.command == "export":
+            result.update({"kind": "chalkline-reference-export",
+                           "source": {"reported_revision": args.reported_revision,
+                                      "verification": "unverified"},
+                           "records": [dict(public_record(record), text=record["text"])
+                                       for record in records]})
         else:
             filters = {key: getattr(args, key) for key in ("brand", "domain", "enforcement")
                        if getattr(args, key) is not None}

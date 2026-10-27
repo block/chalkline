@@ -74,6 +74,7 @@ Keep the small setup until you have a specific need:
 | See a completed small setup | [Fictional Meridian example](examples/meridian/) |
 | Several audiences or content types need different guidance | [Growth guide](docs/growing-a-writing-system.md) and [fictional Harbor example](examples/harbor/) |
 | Check metadata or find references locally | [Local tools](tools/README.md) — Python 3, no packages, accounts, or API keys |
+| Give an optional integration complete reference text | [Candidate export](tools/README.md#export-complete-reference-candidates) — preserves source bytes; approval and source verification remain separate |
 | Understand the source and generated views | [Architecture](docs/architecture.md) |
 | Connect an editor, agent, search service, or docs site | [Integration contract](docs/integrations.md) |
 | Propose a reference change from observed work | [Learning loop](LEARNING.md) |

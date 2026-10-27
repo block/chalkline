@@ -35,6 +35,8 @@ Use the same corpus interpretation across interfaces where practical. Keep adapt
 
 The optional `tools/corpus.py` utilities support corpus `check`, `index`, and `search`; consult `python3 tools/corpus.py --help`. Their outputs are inputs to this workflow, not approval decisions. This document defines no network API or required response schema.
 
+When an integration needs complete references rather than index metadata or search excerpts, the optional [candidate export](../tools/README.md#export-complete-reference-candidates) preserves each file's original text and byte hash. Its reported revision is explicitly unverified; exporting does not select policy, approve content, sanitize directives, or satisfy the cross-repository contract below. A tool such as Ghost can consume reviewed language data under an explicitly authored scope without becoming a second place to maintain the rules.
+
 ## Crossing a repository boundary
 
 Follow [PINNING.md](../PINNING.md), rather than asking a drafting agent to fetch a source repository. A human reviewer or trusted integration validates the canonical source and exact revision, rejects operational directives, and projects approved declarative language data into a reviewed repository-local snapshot.
